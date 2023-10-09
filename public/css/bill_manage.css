@@ -1,0 +1,42 @@
+.w-order {
+    width: 270px;
+}
+.w-all-order {
+    width: 177px;
+}
+.bg-none {
+    background-color: transparent !important;
+}
+.border-full {
+    border-left: 0px;
+}
+.border-r-no {
+    border-right: none;
+}
+.fs {
+    font-size: 15px !important;
+}
+.fs:hover {
+}
+.p-17 {
+    padding: 0px 17px;
+}
+.cl-f2 {
+    color: rgb(153, 153, 153);
+}
+.btn-print {
+    background-color: #0068a5;
+    height: 33px;
+
+    text-transform: uppercase;
+    width: 155px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+.bg-i-excel {
+    background-color: rgb(31, 96, 51);
+}
+.bg-e-excel {
+    background-color: rgb(0, 75, 71);
+}

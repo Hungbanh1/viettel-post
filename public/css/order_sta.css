@@ -1,0 +1,118 @@
+.border-none {
+    border: none;
+}
+.bigNumber {
+    font-size: 2em;
+    font-weight: 700;
+}
+.table-sta {
+    border: 1px solid rgb(222, 226, 230) !important;
+}
+.table-sta thead,
+.table-sta tbody tr {
+    border-bottom: 1px solid rgb(222, 226, 230) !important;
+}
+tr td a {
+    color: #72828b !important;
+}
+.table-sta tr:hover {
+    background-color: rgb(227, 240, 240);
+}
+
+.sta_order tr {
+    height: 56px;
+}
+.ball {
+    width: 10px;
+    height: 10px;
+    float: left;
+    border-radius: 5px;
+    margin: 4px 5px 0 0;
+}
+table.sta_order th {
+    text-align: left; /* Căn giữa ngang */
+    vertical-align: middle; /* Căn giữa dọc */
+    white-space: pre;
+}
+
+.pr-tt {
+    padding-right: 10%;
+}
+.pl-tt {
+    padding-left: 4%;
+}
+.btn-print {
+    background-color: #0068a5;
+    height: 33px;
+
+    text-transform: uppercase;
+    width: 155px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+.bg-i-excel {
+    background-color: rgb(31, 96, 51);
+}
+.bg-e-excel {
+    background-color: rgb(0, 75, 71);
+}
+.gray-border {
+    border: 1px solid rgb(222, 226, 230) !important;
+}
+.w-22 {
+    width: 21%;
+}
+.w-auto {
+    width: auto;
+}
+.nav-item-bg-gray:active {
+    background-color: #b5b5b4;
+    color: #fff;
+}
+.active-bg-gray {
+    background-color: #b5b5b4 !important;
+    color: #fff !important;
+}
+.empty-record {
+    padding: 5px;
+    text-align: center;
+    color: #888;
+}
+.table-responsive thead {
+    border-top: 1px solid rgb(222, 226, 230);
+    border-bottom: 1px solid rgb(222, 226, 230);
+}
+.custom-thead-responsive {
+    padding: 10px 0px;
+}
+table th,
+table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid rgb(222, 226, 230);
+}
+table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid rgb(222, 226, 230);
+}
+.table-responsive tbody tr:hover {
+    color: rgb(33, 37, 41);
+    background-color: rgba(0, 0, 0, 0.075);
+}
+.w-89 {
+    width: 89%;
+}
+.ft-14 {
+    font-size: 14px;
+}
+.btn-add-cus {
+    color: #fff;
+    background-color: #f3ac3c;
+}
+.w-50 {
+    width: 50%;
+}
+.h-35 {
+    height: 35px;
+}

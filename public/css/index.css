@@ -1,0 +1,188 @@
+body {
+    font-size: 14px !important;
+    font-family: arial, sans-serif;
+    background: #f6fafc;
+}
+#header {
+    min-height: 64px;
+    min-width: 320px;
+    /* padding: 0 27px; */
+}
+.nav-item,
+.nav-item .sub-menu a {
+    /* width: 231px;
+    height: 64px; */
+    border-top: 1px solid #c2c2c2 !important;
+    width: 100%;
+    /* max-width: 240px; */
+}
+.sub-menu {
+    background: #f2f2f2;
+}
+.nav-item a {
+    border-left: 2px solid #c2c2c2;
+    border-right: 2px solid #c2c2c2;
+    padding: 20px 10px;
+    min-height: 60px;
+    color: #44494d;
+}
+.h-auto {
+    height: auto;
+}
+.bg-sidebar {
+    background-color: #c8c8c8;
+}
+/* .dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 28%;
+    right: 15px;
+     -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+} */
+.dropdown-toggle {
+    position: relative; /* Đảm bảo phần tử chứa biểu tượng là relative */
+}
+
+.dropdown-toggle::after {
+    content: '';
+    position: absolute; /* Đảm bảo biểu tượng là absolute */
+    top: 44%;
+    right: 15px;
+}
+/* .dropdown-toggle::after {
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: '';
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+} */
+
+.nav-item span {
+    font-size: 14px;
+}
+.nav-item:active {
+    background-color: transparent; /*  Màu nền khi click (giống với màu nền mặc định) */
+}
+
+#ul-sidebar .nav-item:hover {
+    background-color: #c2c2c2;
+}
+.logo-nav-item img {
+    width: 20px;
+    margin-left: 5px;
+}
+.red-stroke {
+    stroke: red;
+}
+.bg-sidebar {
+    background-color: #c8c8c8;
+}
+.active {
+    filter: invert(13%) sepia(87%) saturate(7490%) hue-rotate(343deg) brightness(91%) contrast(106%);
+}
+#ul-sidebar .nav-item {
+    background: rgb(251, 251, 251);
+}
+
+.logo-viet {
+    display: flex;
+    /* Can giữa theo chiều ngang */
+    align-items: center; /* Can giữa theo chiều dọc */
+    height: 64px; /* Đặt chiều cao của khung chứa hình ảnh */
+    padding-left: 9px;
+}
+.red-image {
+    filter: hue-rotate(0deg); /* Màu đỏ */
+}
+
+.active .logo-nav-item img {
+    filter: hue-rotate(120deg);
+    color: red;
+}
+/* .red-img{
+    color: red;
+    content: url(public/img/pie-chart-gray.svg);
+
+} */
+::placeholder {
+    color: #999999 !important;
+    opacity: 1; /* Firefox */
+    font-size: 14px;
+}
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+.form-search {
+    box-shadow: none;
+    border: none;
+    color: rgb(246, 248, 250);
+    margin-left: 0;
+    background-color: rgb(246, 248, 250) !important;
+    padding: 0 12px 0 45px;
+    font-size: 14px;
+    height: 45px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 2px #f2f2f2;
+    border-color: #44494d !important;
+}
+.input-group i.fa-search {
+    position: absolute !important;
+    top: 50%;
+    color: rgb(170, 170, 170);
+    transform: translateY(-50%);
+    left: 10px;
+    z-index: 100;
+    font-size: 20px;
+}
+/* icon  */
+.ico-notify {
+    width: 30px;
+    height: 30px;
+}
+
+.num-not {
+    position: absolute;
+    width: 6%;
+    top: 35%;
+    left: 36%;
+    height: 20px;
+    font-family: 'MyVariableFont', sans-serif;
+    background-color: #ee0033;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 19px;
+}
+#ul-info li {
+    margin: 0px 13px;
+}
+.my-10 {
+    margin: 10px 0px;
+    margin-left: 5%;
+}
+.pr-00 {
+    padding-right: 1px !important;
+}
+/* ------------------------------------- Content ----------------  */
+.bg-lightt {
+    background-color: #f6fafc;
+}
+.content > * {
+    margin-left: 2%;
+}
+.fs-33 {
+    font-size: 14px;
+}
+.header-main-content > span {
+    padding: 3px 0px 0px 6px;
+}
+.header-main-content > a {
+    font-size: 14px;
+}

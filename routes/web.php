@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 // })->name('loginnn');
 
 Route::get('/', function () {
-    return view('auth.loginnn');
+    return view('auth.login');
 });
 
 Auth::routes();

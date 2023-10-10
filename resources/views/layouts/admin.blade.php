@@ -14,20 +14,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <link rel="icon"
+        href="data:;base64,iVBORw0KGgo=" />
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUmx-1 +O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="public/js/index.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
     <title>Dashboard</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <body>
     @php
@@ -163,12 +165,16 @@
                                     <li class="nav-ite">
                                         <div class="" aria-current="page" href="">
                                             <span class="text-muted">Thông báo</span>
-                                            <img class="ico-notify" src="public/img/bell.svg" alt />
-                                            <span class="num-not">49</span>
                                         </div>
+                                    </li>
+                                    <li class="nav-ite position-relative">
+                                        <img class="ico-notify" src="public/img/bell.svg" alt />
+                                        <span class="num-not">49</span>
                                     </li>
                                     <li id="phoneNumber" class="nav-ite">
                                         <span class="font-weight-bold">0909654321</span>
+                                        {{-- {{ Auth::user()->name }} --}}
+
                                     </li>
 
                                     <div class="dropdown">

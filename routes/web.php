@@ -26,6 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 //dashboard
 Route::get('/dashboard', 'AdminDashBoardController@index');
+Route::get('/test', 'AdminDashBoardController@test');
 //lookup
 Route::get('/lookup', 'AdminLookUpController@index')->name('lookup');
 Route::get('/lookup-search', 'AdminLookUpController@search')->name('lookup-search');

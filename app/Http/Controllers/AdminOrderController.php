@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Detail_order;
 use Illuminate\Http\Request;
 
 class AdminOrderController extends Controller
@@ -13,6 +14,12 @@ class AdminOrderController extends Controller
             session(['module_active' => 'order']);
             return $next($request);
         });
+    }
+    function detail_order($order_id)
+    {
+        $detail_order = Detail_order::find($order_id);
+
+        return view('admin.order.detail_order', compact('detail_order'));
     }
     function list()
     {

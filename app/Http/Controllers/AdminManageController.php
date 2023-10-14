@@ -3,16 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Bill;
+use App\Detail_order;
 use Illuminate\Http\Request;
 
 
 class AdminManageController extends Controller
 {
     //
-    function index()
+    function index(Request $request)
     {
-        $bills = Bill::all();
-        return view('admin.manage.bill_manage', compact('bills'));
+        $bills = Detail_order::all();
+        $keyword = $request->input('keyword');
+        if ($keyword != '') {
+            $bills = Detail_order::where('code_order', 'LIKE', "%$keyword%")->get();
+            // $bills = Detail_order::where('phone_sender', 'LIKE', "%$keyword%")->get();
+        }
+        if ($bills->count() === 0) {
+            return view('admin.manage.bill_manage', compact('bills', 'keyword'))->with('message', 'Không có bản ghi nào.');
+        }
+
+
+        return view('admin.manage.bill_manage', compact('bills', 'keyword'));
+    }
+    function detail_order($order_id)
+    {
+        $order_id = $_POST['order_id'];
+        echo $order_id;
+        // return view('admin.order.detail_order');
     }
     function list()
     {

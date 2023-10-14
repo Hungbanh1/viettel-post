@@ -39,6 +39,7 @@ Route::get('/staticts_reve', 'AdminManageController@staticts_reve')->name('stati
 //order
 Route::get('/order_excel', 'AdminOrderController@order_excel')->name('order_excel');
 Route::get('/order', 'AdminOrderController@list')->name('order');
+Route::get('/detail_order/{order_id}', 'AdminOrderController@detail_order')->name('detail_order');
 //user
 Route::get('/setting', 'AdminUserController@setting')->name('setting_acc');
 Route::get('/change_password', 'AdminUserController@change_password')->name('change_password');

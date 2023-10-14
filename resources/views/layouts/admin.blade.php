@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-    <link rel="stylesheet" href="public/css/index.css" />
-    <link rel="stylesheet" href="public/css/order.css" />
-    <link rel="stylesheet" href="public/css/bill_manage.css" />
-    <link rel="stylesheet" href="public/css/order_sta.css" />
+    {{-- <link rel="stylesheet" href="public/css/index.css" /> --}}
+    <link rel="stylesheet" href="{{ asset('public/css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/order.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/bill_manage.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/order_sta.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/order_sta.css') }}">
+    {{-- <link rel="stylesheet" href="public/css/order.css" /> --}}
+    {{-- <link rel="stylesheet" href="public/css/bill_manage.css" /;> --}}
+    {{-- <link rel="stylesheet" href="public/css/order_sta.css" /> --}}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -21,14 +26,14 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUmx-1 +O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <script src="public/js/index.js"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous"
+    crossorigin="anonymous"
         referrerpolicy="no-referrer" />
     <title>Dashboard</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('public/js/index.js') }}"></script>
 </head>
 
 <body>
@@ -44,7 +49,7 @@
                     <!-- <h1>Sidebar</h1> -->
                     <div class="logo-viet bg-white">
                         <a href>
-                            <img src="public/img/vietpost.png" width="200px" height="108px" alt />
+                            <img src="{{ asset('public/img/vietpost.png') }}" width="200px" height="108px" alt />
                         </a>
                     </div>
                     <script></script>
@@ -54,7 +59,7 @@
                             <li class="nav-item "{{ $module_active == 'dashboard' ? 'active' : '' }}>
                                 <a class="nav-link d-flex" href="{{ url('dashboard') }}">
                                     <!-- <div class="logo-nav-item"> -->
-                                    <img class src="public/img/pie-chart-gray.svg" alt />
+                                    <img class src="{{ asset('public/img/pie-chart-gray.svg') }}" alt />
                                     <span class="span-sidebar ml-4">Trang chủ</span>
                                 </a>
                             </li>
@@ -62,7 +67,7 @@
                             <li class="nav-item ">
                                 <a class="nav-link d-flex dropdown-toggle" href="#">
                                     <!-- <div class="logo-nav-item"> -->
-                                    <img class src="public/img/pie-chart-gray.svg" alt />
+                                    <img class src="{{ asset('public/img/package-gray.svg') }}" alt />
                                     <span class="span-sidebar ml-4">Tạo đơn</span>
                                     {{-- <i class="fas fa-angle-down"></i> --}}
                                 </a>
@@ -80,7 +85,7 @@
                             <li class="nav-item">
                                 <a class="nav-link d-flex dropdown-toggle" href="#">
                                     <!-- <div class="logo-nav-item"> -->
-                                    <img class src="public/img/pie-chart-gray.svg" alt />
+                                    <img class src="{{ asset('public/img/server-gray.svg') }}" alt />
                                     <span class="span-sidebar ml-4">Quản lý</span>
                                 </a>
                                 <div class="sub-menu">
@@ -104,7 +109,7 @@
                             <li class="nav-item">
                                 <a class="nav-link d-flex dropdown-toggle">
                                     <!-- <div class="logo-nav-item"> -->
-                                    <img class src="public/img/pie-chart-gray.svg" alt />
+                                    <img class src="{{ asset('public/img/location-gray.svg') }}" alt />
                                     <span class="span-sidebar ml-4">Tra cứu</span>
                                 </a>
                                 <div class="sub-menu">
@@ -120,28 +125,29 @@
                             <li class="nav-item">
                                 <a class="nav-link d-flex" href="#">
                                     <!-- <div class="logo-nav-item"> -->
-                                    <img class src="public/img/pie-chart-gray.svg" alt />
+                                    <img class src="{{ asset('public/img/quan-ly-ban-hang.svg') }}" alt />
                                     <span class="span-sidebar ml-4">Quản lý bán hàng</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link d-flex" href="#">
                                     <!-- <div class="logo-nav-item"> -->
-                                    <img class src="public/img/pie-chart-gray.svg" alt />
+                                    <img class src="{{ asset('public/img/tien-ich.svg') }}" width="20px"
+                                        height="20px" alt />
                                     <span class="span-sidebar ml-4">Tiện ích</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link d-flex" href="{{ route('setting_acc') }}">
                                     <!-- <div class="logo-nav-item"> -->
-                                    <img class src="public/img/pie-chart-gray.svg" alt />
+                                    <img class src="{{ asset('public/img/settings-gray.svg') }}" alt />
                                     <span class="span-sidebar ml-4">Cài đặt tài khoản</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link d-flex" href="#">
                                     <!-- <div class="logo-nav-item"> -->
-                                    <img class src="public/img/pie-chart-gray.svg" alt />
+                                    <img class src="{{ asset('public/img/life-buoy-gray.svg') }}" alt />
                                     <span class="span-sidebar ml-4">Hỏi đáp</span>
                                 </a>
                             </li>

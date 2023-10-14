@@ -6,11 +6,7 @@
                 <a _ngcontent-waf-c42=""><i _ngcontent-waf-c42="" class="fa fa-arrow-left mr-2" style="color: #ee0033"></i></a>
                 <h4 class="font-weight-bold mt-1">Thông tin đơn hàng</h4>
             </div>
-            <style>
-                .w-0 {
-                    width: auto;
-                }
-            </style>
+
             <div class="tools-create d-flex form-inline col-12 mr-5 px-0">
                 <div class="">
                     <div class="form-group">
@@ -25,6 +21,8 @@
                 <div class="excel-input ml-4 border-none">
                     <div class="card-body pt-3">
                         <div class="row">
+                            {{-- {{ dd($detail_order->order_id) }} --}}
+                            {{-- @foreach ($detail_order as $detail_order) --}}
                             <div class="col-4 form-group pl-0">
                                 <div class="card h-100">
                                     <div class="card-body row">
@@ -32,7 +30,7 @@
                                             <div class="card-title">Mã vận đơn:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="text-danger font-weight-bold">19068076612</div>
+                                            <div class="text-danger font-weight-bold">{{ $detail_order->code_order }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Mã đơn hàng:</div>
@@ -44,7 +42,7 @@
                                             <div class="card-title">Ngày tạo:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">22/09/2023 15:51:55</div>
+                                            <div class="">{{ $detail_order->created_at }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Ngày nhận hàng dự kiến:</div>
@@ -71,7 +69,7 @@
                                             <div class="card-title">Dịch vụ vận chuyển:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="font-weight-bold">Chuyển phát tiêu chuẩn</div>
+                                            <div class="font-weight-bold">{{ $detail_order->transfer_ser }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Dịch vụ cộng thêm:</div>
@@ -87,9 +85,8 @@
                                         <div class="col-12">
                                             <div style="color: #ee0033" class="font-weight-bold">Người gửi</div>
                                         </div>
-                                        <div class="col-12 font-weight-bold py-2">Bưu Cục Hồ Chí Minh - 0123456789</div>
-                                        <div class="col-12">Hồ Chí Minh, Quận 11, Phường 05, Số 1 Hồ Chí Minh, PHƯỜNG 5,
-                                            QUẬN 11, Hồ Chí Minh</div>
+                                        <div class="col-12 font-weight-bold py-2">{{ $detail_order->receiver }}</div>
+                                        <div class="col-12">{{ $detail_order->address_receiver }}</div>
                                     </div>
                                     <hr class="w-0" style="margin: 0px 20px" />
                                     <!-- </div> -->
@@ -97,47 +94,51 @@
                                         <div class="col-12">
                                             <div style="color: #ee0033" class="font-weight-bold">Người nhận</div>
                                         </div>
-                                        <div class="col-12 font-weight-bold py-2">Streamer Họ Phùng - 0999999999</div>
-                                        <div class="col-12">Hà Nội, Quận Đống Đa, Phường Quang Trung, 12 Chùa Bộc, P Quang
-                                            Trung, Q Đống Đa, TP Hà Nội, PHƯỜNG QUANG TRUNG, QUẬN ĐỐNG ĐA, Hà Nội</div>
+                                        <div class="col-12 font-weight-bold py-2">{{ $detail_order->sender }}</div>
+                                        <div class="col-12">{{ $detail_order->address_sender }}</div>
                                         <div class="col-12 my-2">
-                                            <small><span class="text-gray" style="color: #959494; font-size: 13px">Thời gian
+                                            <small><span class="text-gray" style="color: #959494; font-size: 13px">Thời
+                                                    gian
                                                     nhận: Cả ngày</span></small>
                                         </div>
                                         <div class="col-12 d-flex">
                                             <small class=""><span class="text-gray mr-1"
-                                                    style="color: #959494; font-size: 13px">Tỷ lệ giao thành công: </span>
+                                                    style="color: #959494; font-size: 13px">Tỷ lệ giao thành công:
+                                                </span>
                                             </small>
-                                            <p class="" style="color: #44ab4a; font-weight: 700">96.37%
-                                                (379547/393859)</p>
+                                            <p class="" style="color: #44ab4a; font-weight: 700">
+                                                {{ $detail_order->success_order }}
+                                            </p>
                                         </div>
                                     </div>
                                     <hr class="w-0" style="margin: 0px 20px" />
                                     <!-- </div> -->
                                     <div class="card-body row my-3">
                                         <div class="col-12 mb-3">
-                                            <div style="color: #ee0033" class="font-weight-bold">Phí và tiền thu hộ</div>
+                                            <div style="color: #ee0033" class="font-weight-bold">Phí và tiền thu hộ
+                                            </div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Hình thức</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">Không thu hộ</div>
+                                            <div class="">{{ $detail_order->form_ship }}</div>
                                         </div>
                                         <div class="col-6 text-left font-weight-bold">
                                             <div class="card-title">Phí vận chuyển</div>
                                             <div class="card-title">(Người gửi trả) (1)</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="text-danger font-weight-bold">176.981 ₫</div>
+                                            <div class="text-danger font-weight-bold">{{ $detail_order->free_ship }}đ</div>
                                         </div>
                                         <div class="col-6 text-left font-weight-bold">
-                                            <div style="white-space: nowrap" class="card-title">Tổng cước phát sinh (2)
+                                            <div style="white-space: nowrap" class="card-title">Tổng cước phát sinh
+                                                (2)
                                             </div>
                                             <div class="card-title">Tổng cước (1) + (2)</div>
                                         </div>
                                         <div style="padding-top: 9%" class="col-6 text-right">
-                                            <div class="text-danger font-weight-bold">176.981 ₫</div>
+                                            <div class="text-danger font-weight-bold">{{ $detail_order->total_fee }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title font-weight-bold">Tiền thu hộ</div>
@@ -167,19 +168,19 @@
                                             <div class="card-title">Tên hàng 1:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">30 - Bình nước Mixi</div>
+                                            <div class="">{{ $detail_order->product_name }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Số lượng:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">1</div>
+                                            <div class="">{{ $detail_order->qty }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Khối lượng:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">15000 g</div>
+                                            <div class="">{{ $detail_order->kg }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Giá trị:</div>
@@ -194,14 +195,16 @@
                                             <div class="card-title">Tổng khối lượng:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="text-danger font-weight-bold mb-2">15000 g</div>
+                                            <div class="text-danger font-weight-bold mb-2">{{ $detail_order->total_kg }}
+                                            </div>
                                         </div>
                                         <div class="col-6 text-left">
-                                            <div class="card-title" style="white-space: nowrap">Tổng khối lượng tính cước
+                                            <div class="card-title" style="white-space: nowrap">Tổng khối lượng tính
+                                                cước
                                             </div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">15000 g</div>
+                                            <div class="">{{ $detail_order->total_kg }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Tổng giá trị:</div>
@@ -213,20 +216,20 @@
                                             <div class="card-title">Loại hàng hóa:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">Bưu kiện</div>
+                                            <div class="">{{ $detail_order->commod }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title" style="white-space: nowrap">Tính chất hàng hóa đặc
                                                 biệt:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class=""></div>
+                                            <div class="">{{ $detail_order->special_product }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Kích thước:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">0x0x0 cm</div>
+                                            <div class="">{{ $detail_order->size }}</div>
                                         </div>
                                         <div class="col-12">
                                             <hr class="w-0" />
@@ -239,7 +242,7 @@
                                             <div class="card-title">Yêu cầu lấy hàng:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">Đến lấy hàng tại nhà</div>
+                                            <div class="">{{ $detail_order->pick_request }}</div>
                                         </div>
 
                                         <div class="col-6 text-left">
@@ -256,6 +259,7 @@
                                     <div class="card-body"></div>
                                 </div>
                             </div>
+                            {{-- @endforeach --}}
                         </div>
                     </div>
                 </div>

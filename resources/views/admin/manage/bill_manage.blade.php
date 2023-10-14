@@ -43,14 +43,20 @@
                     <div class="card-body pt-3">
                         <div class="row">
                             <div class="form-group col-3 exchange-order pr-0 d-flex">
-                                <div class="input-group col-12 px-0 w-test">
-                                    <input type="tel" class="form-control border-r-no bg-none form-reci" id="phone"
-                                        placeholder="Tìm đơn hàng, số điện thoại" />
+                                {{-- <div > --}}
+                                <form action="{{ route('bill_manage') }}" method=""
+                                    class="input-group col-12 px-0 w-test">
+                                    <input type="tel" class="form-control border-r-no bg-none form-reci" name="keyword"
+                                        id="phone" placeholder="Tìm đơn hàng, số điện thoại"
+                                        value="{{ request()->input('keyword') }}" />
                                     <!-- <div class="input-group-append"> -->
-                                    <button class="input-group-text position-relative p-17 btn btn-add bg-none"><i
+                                    <button type="submit"
+                                        class="input-group-text position-relative p-17 btn btn-add bg-none"><i
                                             _ngcontent-exw-c12="" class="fa fa-search fs"></i></button>
-                                    <!-- </div> -->
-                                </div>
+                                </form>
+
+                                <!-- </div> -->
+                                {{-- </div> --}}
                             </div>
                             <div class="form-group col-2 px-0 pl-5">
                                 <div class="calendar">
@@ -128,8 +134,8 @@
                     <div class="card-body pt-0">
                         <div class="row">
                             <div class="col-12">
-                                <button class="btn btn-print mr-2"><img _ngcontent-cpo-c12="" width="15px" height="15px"
-                                        src="public/img/printer-p.svg" /><span _ngcontent-cpo-c12=""> In
+                                <button class="btn btn-print mr-2"><img _ngcontent-cpo-c12="" width="15px"
+                                        height="15px" src="public/img/printer-p.svg" /><span _ngcontent-cpo-c12=""> In
                                         đơn</span></button>
                                 <button class="btn bg-i-excel btn-print mr-2"><img _ngcontent-cpo-c12="" width="15px"
                                         height="15px" src="public/img/printer-p.svg" /><span _ngcontent-cpo-c12=""> Xuất
@@ -186,24 +192,7 @@
                             </li>
                         </ul>
                     </div>
-                    <script>
-                        $(document).ready(function() {
-                            $('.total-order').click(function() {
-                                // Xóa lớp "active_order" từ tất cả các phần tử
-                                $('.total-order').removeClass('active_order');
-                                // Thêm lớp "active_order" cho phần tử được click
-                                $(this).addClass('active_order');
-                            });
-                        });
-                        $(document).ready(function() {
-                            $('.item-main-cont').click(function() {
-                                // Xóa lớp "active_order" từ tất cả các phần tử
-                                $('.item-main-cont').removeClass('active_order_btn');
-                                // Thêm lớp "active_order" cho phần tử được click
-                                $(this).addClass('active_order_btn');
-                            });
-                        });
-                    </script>
+
                     <style></style>
                     <div class="head-tab-group card border-radius-none">
                         <div class="header-tab d-flex ">
@@ -318,32 +307,14 @@
                                         <th class="w-3" role="columnheader">IN/CHƯA IN</th>
                                     </tr>
                                 </thead>
-                                <style>
-                                    .vtp-btn-other-tab {
-                                        padding: 14px 0 4px;
-                                        text-decoration: none;
-                                        display: inline-block;
-                                        color: #000 !important;
-                                        cursor: pointer;
-                                        margin-left: 10px;
-                                    }
-                                </style>
+
                                 <tbody role="rowgroup" class="table_tbody_order bbt-table-tbody">
-                                    @php
-                                        $temp = 0;
-                                    @endphp
+
                                     @foreach ($bills as $item)
-                                        @php
-                                            // dd($item)
-                                            $temp++;
-                                        @endphp
-
-
-
                                         <tr role="row" class="bbt-table">
                                             <td role="gridcell">
                                                 <div
-                                                    class="checkbox-receiver pl-5 d-flex align-items-center justify-content-between custom-control custom-checkbox">
+                                                    class="checkbox-receiver pl-5 pb-3 d-flex align-items-center justify-content-between custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="customCheck_order" />
                                                     <label class="custom-control-label" for="customCheck_order"></label>
@@ -357,7 +328,8 @@
                                                 <div class="bill-order-table">
                                                     <span class="green-text-order"> {{ $item->code_order }} </span>
                                                 </div>
-                                                <a class="purple-text-order" href="#">Xem chi tiết</a>
+                                                <a class="purple-text-order"
+                                                    href="{{ route('detail_order', $item->order_id) }}">Xem chi tiết</a>
                                             </td>
                                             <td role="gridcell">
                                                 <div style="color: rgb(102, 102, 102) !important"
@@ -365,48 +337,55 @@
                                                     230922-00002-00004</div>
                                             </td>
                                             <td role="gridcell">
-                                                <div class="sender-order font-weight-bold">{{ $item->receiver }}</div>
+                                                <div class="sender-order font-weight-bold">{{ $item->receiver }} </div>
                                             </td>
                                             <td role="gridcell">
                                                 <div class="receiver-order">
                                                     <div class="name-receiver font-weight-bold">{{ $item->sender }}</div>
-                                                    <div class="phone-number-rece">0123456789</div>
+                                                    <div class="phone-number-rece">{{ $item->phone_sender }}</div>
                                                 </div>
                                             </td>
                                             <td role="gridcell">
                                                 <div class="product-name-order font-weight-bold">{{ $item->product_name }}
                                                 </div>
+                                            </td>
+                                            <td role="gridcell">
+                                                <div class="status-order">
+                                                    <label _ngcontent-hqc-c12="" class="vtp-label-status"
+                                                        style="background-color: rgb(227, 175, 133)"> Shop hủy lấy </label>
+                                                </div>
+                                            </td>
+                                            <td role="gridcell">
+                                                <div class="date-order">{{ $item->created_at }}</div>
+                                            </td>
+                                            <td role="gridcell">
+                                                <div class="cash-order green-text-order">0 ₫</div>
+                                            </td>
+                                            <td role="gridcell">
+                                                <div class="total-fare-order green-text-order">{{ $item->total_fee }}</div>
+                                            </td>
+                                            <td role="gridcell">
+                                                @if ($item->print == 'Đã in')
+                                                    <div class="print-status-order">
+                                                        <label style="background-color: #00cd90;"
+                                                            class="vtp-label-status">{{ $item->print }}</label>
+                                                    </div>
+                                                @else
+                                                    <div class="print-status-order">
+                                                        <label style="background-color: rgb(250, 111, 111)"
+                                                            class="vtp-label-status">{{ $item->print }}</label>
+                                                    </div>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
                         </div>
-                        </td>
-                        <td role="gridcell">
-                            <div class="status-order">
-                                <label _ngcontent-hqc-c12="" class="vtp-label-status"
-                                    style="background-color: rgb(227, 175, 133)"> Shop hủy lấy </label>
-                            </div>
-                        </td>
-                        <td role="gridcell">
-                            <div class="date-order">22/09/2023 15:51:56</div>
-                        </td>
-                        <td role="gridcell">
-                            <div class="cash-order green-text-order">0 ₫</div>
-                        </td>
-                        <td role="gridcell">
-                            <div class="total-fare-order green-text-order">176.981 ₫</div>
-                        </td>
-                        <td role="gridcell">
-                            <div class="print-status-order">
-                                <label style="background-color: rgb(250, 111, 111)" class="vtp-label-status">Chưa
-                                    in</label>
-                            </div>
-                        </td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection

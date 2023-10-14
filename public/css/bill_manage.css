@@ -202,3 +202,11 @@ ul {
 .table_th_order th {
     padding: 14px 0px;
 }
+.vtp-btn-other-tab {
+    padding: 14px 0 4px;
+    text-decoration: none;
+    display: inline-block;
+    color: #000 !important;
+    cursor: pointer;
+    margin-left: 10px;
+}

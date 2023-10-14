@@ -129,27 +129,19 @@ $(document).ready(function () {
         }
     });
 });
-// $(document).ready(function () {
-//     $('.eye-icon').click(function () {
-//         $(this).toggleClass('open');
-//         var inputField = $(this).prev();
-//         if ($(this).hasClass('open')) {
-//             inputField.attr('type', 'text');
-//         } else {
-//             inputField.attr('type', 'password');
-//         }
-//     });
-// });
-// $(document).ready(function () {
-//     // Sử dụng delegation để gắn sự kiện click
-//     $(document).on('click', '#eye', function () {
-//         $(this).toggleClass('open');
-//         $(this).children('i').toggleClass('fas fa-eye-slash fa-eye');
-//         var inputField = $(this).prev();
-//         if ($(this).hasClass('open')) {
-//             inputField.attr('type', 'text');
-//         } else {
-//             inputField.attr('type', 'password');
-//         }
-//     });
-// });
+$(document).ready(function () {
+    $('.total-order').click(function () {
+        // Xóa lớp "active_order" từ tất cả các phần tử
+        $('.total-order').removeClass('active_order');
+        // Thêm lớp "active_order" cho phần tử được click
+        $(this).addClass('active_order');
+    });
+});
+$(document).ready(function () {
+    $('.item-main-cont').click(function () {
+        // Xóa lớp "active_order" từ tất cả các phần tử
+        $('.item-main-cont').removeClass('active_order_btn');
+        // Thêm lớp "active_order" cho phần tử được click
+        $(this).addClass('active_order_btn');
+    });
+});

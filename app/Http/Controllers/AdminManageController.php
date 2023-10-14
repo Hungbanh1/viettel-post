@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Bill;
 use Illuminate\Http\Request;
+
 
 class AdminManageController extends Controller
 {
     //
     function index()
     {
-        return view('admin.manage.bill_manage');
+        $bills = Bill::all();
+        return view('admin.manage.bill_manage', compact('bills'));
     }
     function list()
     {

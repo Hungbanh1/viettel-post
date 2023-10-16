@@ -59,14 +59,19 @@ body {
     border-bottom: 0;
     border-left: 0.3em solid transparent;
 } */
-
+label {
+    white-space: nowrap !important;
+}
 .nav-item span {
     font-size: 14px;
 }
 .nav-item:active {
     background-color: transparent; /*  Màu nền khi click (giống với màu nền mặc định) */
 }
-
+.option:hover {
+    background-color: #ee0033 !important;
+    color: rgb(255, 255, 255) !important;
+}
 #ul-sidebar .nav-item:hover {
     background-color: #c2c2c2;
 }
@@ -139,6 +144,9 @@ body {
     z-index: 100;
     font-size: 20px;
 }
+.nowrap {
+    white-space: nowrap;
+}
 /* icon  */
 .ico-notify {
     width: 30px;
@@ -185,4 +193,7 @@ body {
 }
 .header-main-content > a {
     font-size: 14px;
+}
+.list-label label {
+    white-space: nowrap;
 }

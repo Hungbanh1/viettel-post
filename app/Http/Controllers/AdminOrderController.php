@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Detail_order;
+use App\Sender;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminOrderController extends Controller
 {
@@ -23,7 +25,10 @@ class AdminOrderController extends Controller
     }
     function list()
     {
-        return view('admin.order.order');
+        $id = Auth::user()->id;
+        $sender = Sender::find($id)->all();
+        // echo $sender->name;
+        return view('admin.order.order', compact('sender'));
     }
     function order_excel()
     {

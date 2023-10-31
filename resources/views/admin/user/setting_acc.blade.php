@@ -82,7 +82,8 @@
                                         <div class="form-group col-12">
                                             <div class="row">
                                                 <div class="col-4">
-                                                    <label class="my-2" for="city">Tỉnh/Thành phố</label>
+                                                    <label class="my-2" for="city">Tỉnh/Thành phố<strong
+                                                            class="text-danger">*</strong></label>
                                                     <select class="form-select form-control form-select-sm mb-3"
                                                         id="city" aria-label=".form-select-sm">
                                                         <option value="" selected>Chọn tỉnh thành</option>
@@ -90,7 +91,8 @@
                                                 </div>
 
                                                 <div class="col-4">
-                                                    <label class="my-2" for="city">Tỉnh/Thành phố</label>
+                                                    <label class="my-2" for="city">Quận/Huyện<strong
+                                                            class="text-danger">*</strong></label>
                                                     <select class="form-select form-control form-select-sm mb-3"
                                                         id="district" aria-label=".form-select-sm">
                                                         <option value="" selected>Chọn tỉnh thành</option>
@@ -99,7 +101,8 @@
 
 
                                                 <div class="col-4">
-                                                    <label class="my-2" for="city">Tỉnh/Thành phố</label>
+                                                    <label class="my-2" for="city">Phường xã<strong
+                                                            class="text-danger">*</strong></label>
                                                     <select class="form-select form-control form-select-sm mb-3"
                                                         id="ward" aria-label=".form-select-sm">
                                                         <option value="" selected>Chọn tỉnh thành</option>

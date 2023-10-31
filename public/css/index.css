@@ -1,7 +1,7 @@
 body {
     font-size: 14px !important;
     font-family: arial, sans-serif;
-    background: #f6fafc;
+    background: #f6fafc !important;
 }
 #header {
     min-height: 64px;
@@ -72,7 +72,7 @@ label {
     background-color: #ee0033 !important;
     color: rgb(255, 255, 255) !important;
 }
-#ul-sidebar .nav-item:hover {
+#ul-sidebar .nav-item a:hover {
     background-color: #c2c2c2;
 }
 .logo-nav-item img {
@@ -86,7 +86,15 @@ label {
     background-color: #c8c8c8;
 }
 .active {
-    filter: invert(13%) sepia(87%) saturate(7490%) hue-rotate(343deg) brightness(91%) contrast(106%);
+    border-right: 3px solid #ee0033 !important;
+    border-left: 3px solid #ee0033 !important;
+    border-radius: 0 !important;
+}
+#ul-sidebar .nav-item.active {
+    color: #ee0033 !important;
+    border-right: 2px solid #ee0033 !important;
+    border-left: 2px solid #ee0033 !important;
+    border-radius: 0 !important;
 }
 #ul-sidebar .nav-item {
     background: rgb(251, 251, 251);
@@ -157,7 +165,7 @@ label {
     position: absolute;
     width: 63%;
     top: 20%;
-    left: 42%;
+    left: 52%;
     height: 20px;
     font-family: 'MyVariableFont', sans-serif;
     background-color: #ee0033;
@@ -197,3 +205,92 @@ label {
 .list-label label {
     white-space: nowrap;
 }
+/* //toolip  -----------*/
+a:hover {
+    text-decoration: none;
+}
+
+header,
+.demo,
+.demo p {
+    margin: 4em 0;
+    text-align: center;
+}
+
+[data-c-tooltip] {
+    /* position: relative; */
+    cursor: pointer;
+}
+
+/* Base styles for the entire c-tooltip */
+[data-c-tooltip]:before,
+[data-c-tooltip]:after {
+    position: absolute;
+    visibility: hidden;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    -moz-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, -moz-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    pointer-events: none;
+}
+
+/* Show the entire c-tooltip on hover and focus */
+[data-c-tooltip]:hover:before,
+[data-c-tooltip]:hover:after,
+[data-c-tooltip]:focus:before,
+[data-c-tooltip]:focus:after {
+    visibility: visible;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+}
+
+/* Base styles for the c-tooltip's directional arrow */
+[data-c-tooltip]:before {
+    z-index: 1001;
+    border: 6px solid transparent;
+    background: transparent;
+    content: '';
+}
+
+/* Base styles for the c-tooltip's content area */
+[data-c-tooltip]:after {
+    z-index: 1000;
+    padding: 8px;
+    width: 100px;
+    /* white-space: nowrap; */
+    background-color: #5a6268;
+    color: #fff;
+    content: attr(data-c-tooltip);
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+/* Horizontally align top/bottom c-tooltips */
+[data-c-tooltip]:after {
+    margin-left: -50px;
+}
+
+/* Bottom */
+[tooltip-position='bottom']:before,
+[tooltip-position='bottom']:after {
+    top: 100%;
+    bottom: auto;
+    left: 50%;
+}
+
+[tooltip-position='bottom']:hover:before,
+[tooltip-position='bottom']:hover:after,
+[tooltip-position='bottom']:focus:before,
+[tooltip-position='bottom']:focus:after {
+    -webkit-transform: translateY(12px);
+    -moz-transform: translateY(12px);
+    transform: translateY(12px);
+}
+
+/* Right */

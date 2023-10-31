@@ -13,6 +13,8 @@ return [
     |
     */
 
+
+    'valid_phone' => 'Số điện thoại không hợp lệ.',
     'accepted' => 'The :attribute must be accepted.',
     'active_url' => 'The :attribute is not a valid URL.',
     'after' => 'The :attribute must be a date after :date.',
@@ -101,7 +103,7 @@ return [
     'password' => 'Mật khẩu không chính xác',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => ':attribute không hợp lệ ',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -139,6 +141,9 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+        ],
+        'phone' => [
+            'regex' => 'Số điện thoại không hợp lệ.',
         ],
     ],
 

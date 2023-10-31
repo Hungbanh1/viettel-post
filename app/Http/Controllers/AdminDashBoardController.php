@@ -8,6 +8,13 @@ use Illuminate\Notifications\Action;
 class AdminDashBoardController extends Controller
 {
     //
+    function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            session(['module_active' => 'dashboard']);
+            return $next($request);
+        });
+    }
     function index()
     {
         // echo "ok";

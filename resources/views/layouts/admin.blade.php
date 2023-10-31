@@ -4,11 +4,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+    </script>
 
 
     <link rel="stylesheet" href="{{ asset('public/css/index.css') }}">
@@ -18,24 +29,17 @@
     <link rel="stylesheet" href="{{ asset('public/css/order_sta.css') }}">
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="icon"
-        href="data:;base64,iVBORw0KGgo=" />
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUmx-1 +O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> --}}
+    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Dashboard</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('public/js/index.js') }}"></script>
+
+
 </head>
 
 <body>
@@ -55,11 +59,17 @@
                         </a>
                     </div>
                     <script></script>
+                    <style>
+                        .sub-menu a:hover {
+                            background-color: #c2c2c2;
+                        }
+                    </style>
 
                     <nav id="sidebarMenu">
                         <ul id="ul-sidebar" class="nav flex-column">
-                            <li class="nav-item "{{ $module_active == 'dashboard' ? 'active' : '' }}>
-                                <a class="nav-link d-flex" href="{{ url('dashboard') }}">
+                            <li class="nav-item  ">
+                                <a class="nav-link d-flex {{ $module_active == 'dashboard' ? 'active' : '' }}"
+                                    href="{{ url('dashboard') }}">
                                     <!-- <div class="logo-nav-item"> -->
                                     <img class src="{{ asset('public/img/pie-chart-gray.svg') }}" alt />
                                     <span class="span-sidebar ml-4">Trang chủ</span>
@@ -67,7 +77,7 @@
                             </li>
 
                             <li class="nav-item ">
-                                <a class="nav-link d-flex dropdown-toggle" href="#">
+                                <a class="nav-link dropdown-toggle d-flex " href="#">
                                     <!-- <div class="logo-nav-item"> -->
                                     <img class src="{{ asset('public/img/package-gray.svg') }}" alt />
                                     <span class="span-sidebar ml-4">Tạo đơn</span>
@@ -94,16 +104,16 @@
                                     <a class="nav-link d-flex" href="{{ route('bill_manage') }}">
                                         <span class="span-sidebar ml-4">Quản lý vận đơn </span>
                                     </a>
-                                    <a class="nav-link d-flex" href="{{ route('staticts_list_reci') }}">
+                                    <a class="nav-link d-flex" href="{{ route('staticts_order') }}">
                                         <span class="span-sidebar ml-4">Thống kê tiền hàng</span>
                                     </a>
-                                    <a class="nav-link d-flex" href="{{ route('staticts_order') }}">
+                                    <a class="nav-link d-flex" href="{{ route('staticts_reve') }}">
                                         <span class="span-sidebar ml-4">Thống kê doanh thu </span>
                                     </a>
                                     <a class="nav-link d-flex" href="{{ route('staticts_process') }}">
                                         <span class="span-sidebar ml-4">Đơn hàng cần xử lý</span>
                                     </a>
-                                    <a class="nav-link d-flex" href="{{ route('staticts_reve') }}">
+                                    <a class="nav-link d-flex" href="{{ route('staticts_list_reci') }}">
                                         <span class="span-sidebar ml-4">Danh sách người nhận</span>
                                     </a>
                                 </div>
@@ -146,7 +156,14 @@
                                     <span class="span-sidebar ml-4">Cài đặt tài khoản</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <style>
+                                .bd-bot {
+
+                                    border-bottom: 1px solid #c2c2c2 !important;
+
+                                }
+                            </style>
+                            <li class="nav-item bd-bot">
                                 <a class="nav-link d-flex" href="#">
                                     <!-- <div class="logo-nav-item"> -->
                                     <img class src="{{ asset('public/img/life-buoy-gray.svg') }}" alt />
@@ -176,11 +193,11 @@
                                         </div>
                                     </li>
                                     <li class="nav-ite position-relative">
-                                        <img class="ico-notify" src="public/img/bell.svg" alt />
+                                        <img class="ico-notify" src="{{ asset('public/img/bell.svg') }}" alt />
                                         <span class="num-not">49</span>
                                     </li>
                                     <li id="phoneNumber" class="nav-ite">
-                                        <span class="font-weight-bold">0909654321</span>
+                                        <span class="font-weight-bold">{{ Auth::user()->name }}</span>
                                         {{-- {{ Auth::user()->name }} --}}
 
                                     </li>
@@ -188,7 +205,8 @@
                                     <div class="dropdown">
                                         <li class="nav-ite" type="button" id="dropdownMenuButton user"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img class="ico-notify" src="public/img/icon-user.png" alt />
+                                            <img class="ico-notify" src="{{ asset('public/img/icon-user.png') }}"
+                                                alt />
                                             <i _ngcontent-gaw-c7="" style="width: 8px; height: 14px"
                                                 class="fa fa-caret-down ml-2"></i>
 

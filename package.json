@@ -1,6 +1,10 @@
 {
+    "name": "chartjs-example",
+    "version": "1.0.0",
+    "license": "MIT",
     "private": true,
     "scripts": {
+        "build": "parcel build src/index.html",
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "npm run development -- --watch",
@@ -16,6 +20,7 @@
         "jquery": "^3.2",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.13",
+        "parcel": "^2.6.2",
         "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
@@ -24,6 +29,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "select2": "^4.1.0-rc.0"
+        "@cubejs-client/core": "^0.31.0",
+        "chart.js": "^4.4.0"
     }
 }

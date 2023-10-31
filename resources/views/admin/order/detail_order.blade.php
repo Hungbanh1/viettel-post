@@ -3,7 +3,8 @@
     <div class="excel-online">
         <div class="main-content">
             <div class="d-flex" style="align-items: center; padding-top: 10px; margin-left: 3%">
-                <a _ngcontent-waf-c42=""><i _ngcontent-waf-c42="" class="fa fa-arrow-left mr-2" style="color: #ee0033"></i></a>
+                <a href="{{ route('bill_manage') }}" _ngcontent-waf-c42=""><i _ngcontent-waf-c42=""
+                        class="fa fa-arrow-left mr-2" style="color: #ee0033"></i></a>
                 <h4 class="font-weight-bold mt-1">Thông tin đơn hàng</h4>
             </div>
 
@@ -11,7 +12,8 @@
                 <div class="">
                     <div class="form-group">
                         <button class="btn btn-danger">Xóa đơn</button>
-                        <button class="btn btn-primary mx-3"><img src="public/img/printer-p.svg" alt="" />In
+                        <button class="btn btn-primary mx-3"><img src="{{ asset('public/img/printer-p.svg') }}"
+                                alt="" />In
                             đơn</button>
                     </div>
                 </div>
@@ -42,19 +44,20 @@
                                             <div class="card-title">Ngày tạo:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">{{ $detail_order->created_at }}</div>
+                                            <div class="">{{ $detail_order->created_at->format('d/m/Y') }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Ngày nhận hàng dự kiến:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">22/09/2023</div>
+                                            <div class="">{{ $detail_order->date_giao->format('d/m/Y') }}</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Ngày giao hàng dự kiến</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">26/09/2023</div>
+                                            <div class="">{{ $detail_order->date_nhan->format('d/m/Y') }}</div>
+
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Trạng thái:</div>
@@ -62,7 +65,8 @@
                                         <div class="col-6 text-right">
                                             <div class="status-order">
                                                 <label _ngcontent-hqc-c12="" class="vtp-label-status"
-                                                    style="background-color: rgb(227, 175, 133)"> Shop hủy lấy </label>
+                                                    style="background-color: rgb(227, 175, 133)">
+                                                    {{ $detail_order->status }} </label>
                                             </div>
                                         </div>
                                         <div class="col-6 text-left">
@@ -85,8 +89,8 @@
                                         <div class="col-12">
                                             <div style="color: #ee0033" class="font-weight-bold">Người gửi</div>
                                         </div>
-                                        <div class="col-12 font-weight-bold py-2">{{ $detail_order->receiver }}</div>
-                                        <div class="col-12">{{ $detail_order->address_receiver }}</div>
+                                        <div class="col-12 font-weight-bold py-2">{{ $ordersangsender->name }}</div>
+                                        <div class="col-12">{{ $ordersangsender->address }}</div>
                                     </div>
                                     <hr class="w-0" style="margin: 0px 20px" />
                                     <!-- </div> -->
@@ -94,12 +98,12 @@
                                         <div class="col-12">
                                             <div style="color: #ee0033" class="font-weight-bold">Người nhận</div>
                                         </div>
-                                        <div class="col-12 font-weight-bold py-2">{{ $detail_order->sender }}</div>
+                                        <div class="col-12 font-weight-bold py-2"> {{ $detail_order->receiver }}</div>
                                         <div class="col-12">{{ $detail_order->address_sender }}</div>
                                         <div class="col-12 my-2">
                                             <small><span class="text-gray" style="color: #959494; font-size: 13px">Thời
                                                     gian
-                                                    nhận: Cả ngày</span></small>
+                                                    nhận: {{ $detail_order->time_ship }}</span></small>
                                         </div>
                                         <div class="col-12 d-flex">
                                             <small class=""><span class="text-gray mr-1"
@@ -107,7 +111,7 @@
                                                 </span>
                                             </small>
                                             <p class="" style="color: #44ab4a; font-weight: 700">
-                                                {{ $detail_order->success_order }}
+                                                {{ $detail_order->success_order }}%
                                             </p>
                                         </div>
                                     </div>
@@ -129,7 +133,7 @@
                                             <div class="card-title">(Người gửi trả) (1)</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="text-danger font-weight-bold">{{ $detail_order->free_ship }}đ</div>
+                                            <div class="text-danger font-weight-bold">{{ $detail_order->fee_ship }}đ</div>
                                         </div>
                                         <div class="col-6 text-left font-weight-bold">
                                             <div style="white-space: nowrap" class="card-title">Tổng cước phát sinh
@@ -138,7 +142,8 @@
                                             <div class="card-title">Tổng cước (1) + (2)</div>
                                         </div>
                                         <div style="padding-top: 9%" class="col-6 text-right">
-                                            <div class="text-danger font-weight-bold">{{ $detail_order->total_fee }}</div>
+                                            <div class="text-danger font-weight-bold">{{ $detail_order->total_fee }}đ
+                                            </div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title font-weight-bold">Tiền thu hộ</div>
@@ -180,13 +185,14 @@
                                             <div class="card-title">Khối lượng:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">{{ $detail_order->kg }}</div>
+                                            <div class="">{{ $detail_order->kg }} g </div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Giá trị:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">6.000.000 ₫</div>
+                                            {{-- <div class="">{{ number_format($detail_order->price_product) }} ₫</div> --}}
+                                            <div class="">{{ $detail_order->price_product }} ₫</div>
                                         </div>
                                         <div class="col-12">
                                             <hr class="w-0" />
@@ -195,7 +201,7 @@
                                             <div class="card-title">Tổng khối lượng:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="text-danger font-weight-bold mb-2">{{ $detail_order->total_kg }}
+                                            <div class="text-danger font-weight-bold mb-2">{{ $detail_order->total_kg }} g
                                             </div>
                                         </div>
                                         <div class="col-6 text-left">
@@ -204,13 +210,14 @@
                                             </div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="">{{ $detail_order->total_kg }}</div>
+                                            <div class="">{{ $detail_order->total_kg }} g</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Tổng giá trị:</div>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <div class="text-danger font-weight-bold">6.000.000 ₫</div>
+                                            <div class="text-danger font-weight-bold">
+                                                {{ number_format($detail_order->total) }} ₫</div>
                                         </div>
                                         <div class="col-6 text-left">
                                             <div class="card-title">Loại hàng hóa:</div>

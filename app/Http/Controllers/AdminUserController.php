@@ -8,20 +8,24 @@ use Illuminate\Http\Request;
 class AdminUserController extends Controller
 {
     //
-    function test()
+    // function test()
+    // {
+    //     $users = User::all();
+
+    //     foreach ($users as $user) {
+    //         echo $user->name;
+
+    //         // Lấy thông tin "Receive" cho mỗi "User"
+    //         $receiveData = $user->recieve; // Chú ý rằng "recieve" là một phương thức
+
+    //         foreach ($receiveData as $receive) {
+    //             echo $receive->phone;
+    //         }
+    //     }
+    // }
+    function testt()
     {
-        $users = User::all();
-
-        foreach ($users as $user) {
-            echo $user->name;
-
-            // Lấy thông tin "Receive" cho mỗi "User"
-            $receiveData = $user->recieve; // Chú ý rằng "recieve" là một phương thức
-
-            foreach ($receiveData as $receive) {
-                echo $receive->phone;
-            }
-        }
+        return view('admin.user.test');
     }
     function setting()
     {

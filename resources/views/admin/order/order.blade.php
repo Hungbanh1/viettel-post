@@ -1,5 +1,16 @@
 @extends('layouts.admin')
 @section('content')
+    <script>
+        // Kiểm tra nếu có thông báo thành công
+        @if (session('success'))
+            // Hiển thị thông báo
+            alert('{{ session('success') }}');
+            // Reload trang sau 2 giây (hoặc thời gian mà bạn muốn)
+            setTimeout(function() {
+                window.location.href = '{{ route('bill_manage') }}';
+            }, 1000);
+        @endif
+    </script>
     <div class="col-12 no-padding-row">
         <div class="table-create-order d-flex mt-4 ml-5 font-weight-bold">
             <div class="create-in">
@@ -9,7 +20,8 @@
                 <span>Tạo đơn quốc tế</span>
             </div>
         </div>
-        <form class="w-100" action>
+        <form class="w-100" method="POST" action="{{ route('add') }}">
+            @csrf
             <div class="tools-create d-flex form-inline col-12 mt-5 mr-5 px-0">
                 <div class="setting">
                     <div class="form-group">
@@ -51,13 +63,22 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <div class="dropdown"> <select
+                                    <div class="dropdown">
+                                        <select
                                             class="w-100 text-left cursor-pointer form-select btn border-drop bg-lightt btn-dropdown btn-lightt dropdown-toggle d-flex align-items-center justify-content-between "
-                                            aria-label="Default select example" id="select22">
-                                            @foreach ($sender as $item)
-                                                <option class="option" selected>{{ $item->name }} - {{ $item->address }}
+                                            aria-label="Default select example" name="select_sender">
+                                            @if ($sender->isEmpty())
+                                                <option class="" value="">{{ $message }}
                                                 </option>
-                                            @endforeach
+                                            @else
+                                                @foreach ($sender as $item)
+                                                    <option class="option" value="{{ $item->id }}" selected>
+                                                        {{ $item->final_address }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
+
+
                                         </select>
                                     </div>
                                 </div>
@@ -88,37 +109,61 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                {{-- <div class="form-group login-input-item mx-3">
+                                    <label class="mb-0" for="email">Số điện thoại/Email</label>
+                                    <input id="email" type="email"
+                                        class="form-control text-muted mb-2 @error('email') is-invalid @enderror"
+                                        name="email" value="{{ old('email') }}" autocomplete="email" autofocus
+                                        placeholder="Nhập email hoặc số điện thoại" />
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div> --}}
                                 <div class="form-group row">
                                     <div class="col-2 d-flex mt-2">
-                                        <label style="white-space: pre" for>Điện thoại <span
+                                        <label style="white-space: pre" for="phone">Điện thoại <span
                                                 class="text-danger">*</span></label>
                                     </div>
+
                                     <div class="col-10">
-                                        <!-- <input class="form-control" type="tel"> -->
-                                        <input type="tel" class="form-control form-reci" id="phone"
+                                        <input type="text" class="form-control form-reci" name="phone" id="phone"
                                             placeholder="Nhập số điện thoại để tự điền thông tin người nhận" />
+
+                                        @error('phone')
+                                            <span style="display: block" class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-2 d-flex mt-2">
-                                        <label style="white-space: pre" for>Họ tên <span
+                                        <label style="white-space: pre" for="name">Họ tên <span
                                                 class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-10">
                                         <!-- <input class="form-control" type="tel"> -->
-                                        <input type="tel" class="form-control form-reci" id="phone"
+                                        <input type="tel"class="form-control form-reci" name="name" id="name"
                                             placeholder="Nhập tên người nhận" />
+                                        @error('name')
+                                            <span style="display: block" class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <div class="col-2 d-flex mt-2">
-                                        <label style="white-space: pre" for>Địa chỉ <span
+                                        <label style="white-space: pre" for="address">Địa chỉ <span
                                                 class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-10">
                                         <!-- <input class="form-control" type="tel"> -->
-                                        <input type="tel" class="form-control form-reci" id="phone"
+                                        <input type="tel" class="form-control form-reci" name="address"
+                                            id="address"
                                             placeholder="Nhập địa chỉ (số nhà/tên đường, phường/xã, quận/huyện, tỉnh/thành...)" />
                                     </div>
                                 </div>
@@ -128,31 +173,33 @@
                                     <div class="col-10">
                                         <div class="row address-reci">
                                             <div class="col-6">
-                                                <select class="form-select form-control form-select-sm mb-3" id="city"
-                                                    aria-label=".form-select-sm">
+                                                <select class="form-select form-control form-select-sm mb-3 city_text"
+                                                    name='city' id="city" aria-label=".form-select-sm">
                                                     <option value="" selected>Chọn tỉnh thành</option>
                                                 </select>
                                             </div>
                                             <div class="col-6">
                                                 <!-- Khối 2 - Trên phải -->
                                                 <select class="form-select form-control form-select-sm mb-3"
-                                                    id="district" aria-label=".form-select-sm">
+                                                    name="district" id="district" aria-label=".form-select-sm">
                                                     <option value="" selected>Huyện quận</option>
                                                 </select>
                                             </div>
                                             <div class="col-6">
                                                 <!-- Khối 3 - Dưới trái -->
                                                 <select class="form-select form-control form-select-sm mb-3"
-                                                    id="ward" aria-label=".form-select-sm">
+                                                    name="ward" id="ward" aria-label=".form-select-sm">
                                                     <option value="" selected>Xã phường</option>
                                                 </select>
                                             </div>
                                             <div class="col-6">
                                                 <!-- Khối 4 - Dưới phải -->
-                                                <input type="tel" class="form-control form-reci" id="phone"
-                                                    placeholder="Đường/Thôn/Xóm" />
+                                                <input type="tel" class="form-control form-reci" id="village"
+                                                    name="village" placeholder="Đường/Thôn/Xóm" />
                                             </div>
                                         </div>
+                                        <button type="submit" class="btn btn-primary">Tạo đơn</button>
+
                                         <script>
                                             var citis = document.getElementById("city");
                                             var districts = document.getElementById("district");
@@ -169,27 +216,28 @@
 
                                             function renderCity(data) {
                                                 for (const x of data) {
-                                                    citis.options[citis.options.length] = new Option(x.Name, x.Id);
+                                                    citis.options[citis.options.length] = new Option(x.Name, x.Name); // Đặt giá trị value thành x.Name
                                                 }
                                                 citis.onchange = function() {
                                                     district.length = 1;
                                                     ward.length = 1;
                                                     if (this.value != "") {
-                                                        const result = data.filter(n => n.Id === this.value);
-
+                                                        const result = data.filter(n => n.Name === this.value); // Sử dụng x.Name thay vì x.Id
                                                         for (const k of result[0].Districts) {
-                                                            district.options[district.options.length] = new Option(k.Name, k.Id);
+                                                            district.options[district.options.length] = new Option(k.Name, k
+                                                                .Name); // Đặt giá trị value thành k.Name
                                                         }
                                                     }
                                                 };
                                                 district.onchange = function() {
                                                     ward.length = 1;
-                                                    const dataCity = data.filter((n) => n.Id === citis.value);
+                                                    const dataCity = data.filter((n) => n.Name === citis.value); // Sử dụng x.Name thay vì x.Id
                                                     if (this.value != "") {
-                                                        const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
-
+                                                        const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0]
+                                                            .Wards; // Sử dụng k.Name thay vì k.Id
                                                         for (const w of dataWards) {
-                                                            wards.options[wards.options.length] = new Option(w.Name, w.Id);
+                                                            wards.options[wards.options.length] = new Option(w.Name, w
+                                                                .Name); // Đặt giá trị value thành w.Name
                                                         }
                                                     }
                                                 };
@@ -200,7 +248,7 @@
                             </div>
                         </div>
                         <!-- // Chọn dich vụ  -->
-                        <div class="sender h100 bg-white ml-4 card form-group">
+                        {{-- <div class="sender h100 bg-white ml-4 card form-group">
                             <div
                                 class="header-sender d-flex align-items-center justify-content-between pt-2 card-header w-100">
                                 <div class="h1-sender d-flex">
@@ -258,7 +306,7 @@
 
                                 <!-- </div> -->
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="content-left col-md-6 pl-0 ml-6">
@@ -287,28 +335,33 @@
                                     </div>
                                     <div class="input-group col-6">
                                         <div class="custom-check d-flex align-items-center">
-                                            <input class="custom-radio-check" type="radio" id="customCheck111" />
+                                            <input class="mr-2" type="radio" id="customCheck111" name="shipmentType"
+                                                value="Bưu kiện" />
                                             <label class="custom-check-label mb-0" for="customCheck111">Bưu kiện</label>
                                         </div>
                                     </div>
+
                                     <div class="input-group col-6">
                                         <div class="custom-check d-flex align-items-center">
-                                            <input type="radio" id="customCheck111" />
-                                            <label class="custom-check-label mb-0" for="customCheck111">Bưu kiện</label>
+                                            <input class="mr-2" type="radio" id="customCheck112" name="shipmentType"
+                                                value="Tài liệu" />
+                                            <label class="custom-check-label mb-0" for="customCheck112">Tài liệu</label>
                                         </div>
                                     </div>
+
+
                                 </div>
                                 <hr />
                                 <!-- // 2 -->
                                 <div class="form-group row">
                                     <div class="col-2 d-flex mt-2">
-                                        <label style="white-space: pre" for>Tên hàng 1 <span
+                                        <label style="white-space: pre" for="product_name">Tên hàng 1 <span
                                                 class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-10">
                                         <!-- <input class="form-control" type="tel"> -->
-                                        <input type="tel" class="form-control form-reci" id="phone"
-                                            placeholder="Nhập tên hàng hóa" />
+                                        <input type="tel" class="form-control form-reci" id="product_name"
+                                            name="product_name" placeholder="Nhập tên hàng hóa" />
                                     </div>
                                 </div>
                                 <!-- // 3  -->
@@ -316,20 +369,24 @@
                                     <div class="col-2 d-flex mt-2">
                                         <label style="white-space: pre" for></label>
                                     </div>
+                                    <style>
 
+                                    </style>
                                     <div class="col-10">
                                         <div class="row info-order">
                                             <div class="col-4 input-group">
-                                                <a class="labelQty">
+                                                <a data-c-tooltip="Số lượng" tooltip-position ="bottom" class="labelQty">
                                                     <img width="18px" height="14px" src="public/img/box.svg"
                                                         alt="" />
                                                     <span class="text-danger">*</span>
                                                 </a>
-                                                <input type="tel" class="form-control form-reci pl-5" id="phone"
-                                                    placeholder="1" />
+                                                <input id="qty" name="qty" placeholder="1"
+                                                    value="{{ old('qty') }}" type="text"
+                                                    class="form-control form-reci pl-5" id="phone" placeholder="1" />
                                             </div>
                                             <div class="col-4 input-group">
-                                                <a class="labelQty">
+                                                <a data-c-tooltip="Trọng lượng" tooltip-position ="bottom"
+                                                    class="labelQty">
                                                     <i _ngcontent-diq-c14="" class="fa fa-balance-scale"
                                                         mattooltipclass="tool-tip"
                                                         style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
@@ -338,12 +395,13 @@
 
                                                     <span class="text-danger">*</span>
                                                 </a>
-                                                <input type="tel" class="form-control form-reci pl-25rem"
-                                                    id="phone" placeholder="Trọng lượng" />
+                                                <input type="text" class="form-control form-reci pl-25rem"
+                                                    id="kg" name="kg" placeholder="Trọng lượng"
+                                                    value="{{ old('kg') }}" placeholder="Trọng lượng" />
                                                 <a href="" class="gram">g</a>
                                             </div>
                                             <div class="col-4 input-group">
-                                                <a class="labelQty">
+                                                <a data-c-tooltip="Đơn giá" tooltip-position ="bottom" class="labelQty">
                                                     <i _ngcontent-diq-c14="" class="fa-solid fa-money-bill"
                                                         mattooltipclass="tool-tip"
                                                         style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0)"
@@ -352,9 +410,11 @@
 
                                                     <span class="text-danger">*</span>
                                                 </a>
-                                                <input type="tel" class="form-control form-reci pl-25rem"
-                                                    id="phone" placeholder="Giá trị hàng" />
-                                                <a href="" class="gram">đ</a>
+                                                <input type="text" class="form-control form-reci pl-25rem"
+                                                    id="price_product" name="price_product" oninput="formatNumber(this);"
+                                                    placeholder="Giá trị hàng"
+                                                    value="{{ old('price_product') ? number_format(old('price_product')) : '' }}" />
+
                                             </div>
                                         </div>
                                     </div>
@@ -409,7 +469,8 @@
                                                         <div
                                                             class="checkbox-receiver d-flex align-items-center justify-content-between custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input"
-                                                                id="customCheck11" />
+                                                                id="customCheck11" name="special_features[]"
+                                                                value="Giá trị cao">
                                                             <label class="custom-control-label" for="customCheck11">Giá
                                                                 trị cao</label>
                                                         </div>
@@ -420,7 +481,8 @@
                                                         <div
                                                             class="checkbox-receiver d-flex align-items-center justify-content-between custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input"
-                                                                id="customCheck2" />
+                                                                id="customCheck2" name="special_features[]"
+                                                                value="Dễ vỡ">
                                                             <label class="custom-control-label" for="customCheck2">Dễ
                                                                 vỡ</label>
                                                         </div>
@@ -431,7 +493,8 @@
                                                         <div
                                                             class="checkbox-receiver d-flex align-items-center justify-content-between custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input"
-                                                                id="customCheck3" />
+                                                                id="customCheck3" name="special_features[]"
+                                                                value="Nguyên khối">
                                                             <label class="custom-control-label" for="customCheck3">Nguyên
                                                                 khối</label>
                                                         </div>
@@ -444,7 +507,9 @@
                                                         <div
                                                             class="checkbox-receiver d-flex align-items-center justify-content-between custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input"
-                                                                id="customCheck4" />
+                                                                id="customCheck4" name="special_features[]"
+                                                                value="Quá
+                                                                khổ">
                                                             <label class="custom-control-label" for="customCheck4">Quá
                                                                 khổ</label>
                                                         </div>
@@ -455,7 +520,9 @@
                                                         <div
                                                             class="checkbox-receiver d-flex align-items-center justify-content-between custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input"
-                                                                id="customCheck5" />
+                                                                id="customCheck5" name="special_features[]"
+                                                                value="Chất
+                                                                Lỏng">
                                                             <label class="custom-control-label" for="customCheck5">Chất
                                                                 Lỏng</label>
                                                         </div>
@@ -466,7 +533,9 @@
                                                         <div
                                                             class="checkbox-receiver d-flex align-items-center justify-content-between custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input"
-                                                                id="customCheck6" />
+                                                                id="customCheck6" name="special_features[]"
+                                                                value="Từ
+                                                                tính, Pin">
                                                             <label class="custom-control-label" for="customCheck6">Từ
                                                                 tính, Pin</label>
                                                         </div>
@@ -480,7 +549,9 @@
                                                         <div
                                                             class="checkbox-receiver d-flex align-items-center justify-content-between custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input"
-                                                                id="customCheck7" />
+                                                                id="customCheck7" name="special_features[]"
+                                                                value="Hàng
+                                                                lạnh">
                                                             <label class="custom-control-label" for="customCheck7">Hàng
                                                                 lạnh</label>
                                                         </div>
@@ -500,22 +571,22 @@
                                         <div class="col-10 p-0">
                                             <div class="d-flex address-reci">
                                                 <div class="col-4 pr-0">
-                                                    <input type="tel" class="form-control form-reci" id="phone"
-                                                        placeholder="Dài(cm)" />
+                                                    <input type="tel" class="form-control form-reci" name="length"
+                                                        id="length" placeholder="Dài(cm)" />
                                                 </div>
                                                 <div class="col-4 pr-0">
-                                                    <!-- Khối 2 - Trên phải -->
-                                                    <input type="tel" class="form-control form-reci" id="phone"
-                                                        placeholder="Rộng(cm)" />
+                                                    <input type="tel" class="form-control form-reci" name="width"
+                                                        id="width" placeholder="Rộng(cm)" />
                                                 </div>
                                                 <div class="col-4 pr-0">
-                                                    <!-- Khối 3 - Dưới trái -->
-                                                    <input type="tel" class="form-control form-reci" id="phone"
-                                                        placeholder="Cao(cm)" />
+                                                    <input type="tel" class="form-control form-reci" name="height"
+                                                        id="height" placeholder="Cao(cm)" />
                                                 </div>
                                             </div>
                                             <div class="note-size-detail my-3 ml-3">
-                                                <small class="text-muted">Quy đổi kích thước (đối với hàng hoá cồng kềnh)
+                                                <small class="text-muted">Quy đổi kích thước (đối với hàng hoá
+                                                    cồng
+                                                    kềnh)
                                                     <a href=""><strong class="txt-gray">Chi
                                                             tiết</strong></a></small>
                                             </div>
@@ -527,7 +598,8 @@
                                         </div>
                                         <div class="col-10 exchange-order pr-0 d-flex">
                                             <div class="input-group col-12 px-0 w-test">
-                                                <input type="tel" class="form-control form-reci" id="phone"
+                                                <input disabled type="tel" class="form-control form-reci"
+                                                    id="phone"
                                                     placeholder="Khối lượng quy đổi từ kích thước hàng hóa" />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text ft-14">g</span>
@@ -542,8 +614,9 @@
                                         </div>
                                         <div class="col-10 pr-0">
                                             <!-- <input class="form-control" type="tel"> -->
-                                            <input type="tel" class="form-control form-reci" id="phone"
-                                                placeholder="Nhập mã đơn hàng tự tạo" />
+                                            <input type="tel" class="form-control form-reci"
+                                                id="code_order"name="code_order"
+                                                placeholder="Nhập mã đơn hàng tự tạo - VTP-123" />
                                         </div>
                                     </div>
                                 </div>
@@ -551,12 +624,7 @@
                         </div>
                     </div>
                     <style>
-                        .cod-a,
-                        .note-exam {
-                            color: #007ad9 !important;
-                            font-size: 13px;
-                            font-style: italic;
-                        }
+
                     </style>
                     <div class="sender h100 bg-white ml-4 card form-group">
                         <div class="card-body">
@@ -574,13 +642,32 @@
                                             </div>
                                             <div
                                                 class="checkbox-receiver mb-2 d-flex align-items-center justify-content-between custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck12" />
+                                                <input type="checkbox" name="form_ship" value="Thu hộ bằng tiền hàng"
+                                                    class="custom-control-input" id="customCheck12" />
                                                 <label class="custom-control-label" for="customCheck12">Thu hộ bằng tiền
                                                     hàng</label>
-                                            </div>
 
-                                            <input type="tel" class="form-control form-reci" id="phone"
-                                                value="0" placeholder="0 đ" />
+                                            </div>
+                                            <script>
+                                                function formatNumber(input) {
+                                                    let value = input.value;
+
+                                                    // Loại bỏ tất cả các ký tự không phải là số và dấu phẩy
+                                                    value = value.replace(/[^0-9,]/g, '');
+
+                                                    // Loại bỏ dấu phẩy cũ
+                                                    value = value.replace(/,/g, '');
+
+                                                    // Định dạng lại số với dấu phẩy sử dụng hàm toLocaleString với ngôn ngữ 'en-US'
+                                                    value = Number(value).toLocaleString('en-US');
+
+                                                    // Gán giá trị đã được định dạng lại vào trường input
+                                                    input.value = value;
+                                                }
+                                            </script>
+                                            <input type="tel" name="fee_ship" class="form-control form-reci"
+                                                id="fee_ship" value="0" oninput="formatNumber(this);"
+                                                placeholder="0 đ" />
                                         </div>
                                     </div>
                                     <div class="col-6 form-group">
@@ -591,15 +678,19 @@
                                         <div class="form-group d-flex">
                                             <div class="input-group">
                                                 <div class="custom-check d-flex align-items-center">
-                                                    <input type="radio" id="customCheck111" />
-                                                    <label class="custom-check-label ml-2 mb-0" for="customCheck111">Người
+                                                    <input type="radio" checked id="" name="payer"
+                                                        value="Người
+                                                        gửi" />
+                                                    <label class="custom-check-label ml-2 mb-0" for="">Người
                                                         gửi</label>
                                                 </div>
                                             </div>
                                             <div class="input-group">
                                                 <div class="custom-check d-flex align-items-center">
-                                                    <input type="radio" id="customCheck111" />
-                                                    <label class="custom-check-label ml-2 mb-0" for="customCheck111">Người
+                                                    <input type="radio" id="" name="payer"
+                                                        value="Người
+                                                        nhận" />
+                                                    <label class="custom-check-label ml-2 mb-0" for="">Người
                                                         nhận</label>
                                                 </div>
                                             </div>
@@ -629,21 +720,24 @@
                                                 style="white-space: pre" for>YÊU CẦU LẤY HÀNG</label>
                                             <div class="method-pay">
                                                 <a class="cod-a" href=""><i _ngcontent-ysi-c27=""
-                                                        class="fa fa-info-circle mr-1"></i>Thời gian quy định lấy hàng</a>
+                                                        class="fa fa-info-circle mr-1"></i>Thời gian quy định lấy
+                                                    hàng</a>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <div class="custom-check d-flex align-items-center">
-                                                        <input type="radio" id="customCheck111" />
+                                                        <input type="radio" id="pick_request_home" name="pick_request"
+                                                            value="Đến lấy hàng tại nhà" />
                                                         <label class="custom-check-label ml-2 mb-0"
-                                                            for="customCheck111">Đến lấy hàng tại nhà</label>
+                                                            for="pick_request_home">Đến lấy hàng tại nhà</label>
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
                                                     <div class="custom-check d-flex align-items-center">
-                                                        <input type="radio" id="customCheck111" />
+                                                        <input type="radio" id="pick_request_post_office"
+                                                            name="pick_request" value="Gửi tại bưu cục" />
                                                         <label class="custom-check-label ml-2 mb-0"
-                                                            for="customCheck111">Gửi tại bưu cục</label>
+                                                            for="pick_request_post_office">Gửi tại bưu cục</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -652,35 +746,19 @@
                                                     style="white-space: pre-line" for> THỜI GIAN PHÁT HÀNG MONG
                                                     MUỐN</label>
                                                 <div class="dropdown">
-                                                    <button
-                                                        class="btn w-100 border-drop bg-lightt btn-dropdown btn-lightt dropdown-toggle d-flex align-items-center justify-content-between"
-                                                        type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                                        aria-expanded="false">
-                                                        <div class="drop-item mr-4">Cả ngày</div>
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <!-- Tạo thanh tìm kiếm bằng input -->
-                                                        <li>
-                                                            <input class="form-control" type="text"
-                                                                placeholder="Tìm kiếm" aria-label="Search"
-                                                                id="dropdown-search" />
-                                                        </li>
-                                                        <li>
-                                                            <hr class="dropdown-divider" />
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">Mục 1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">Mục 2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">Mục 3</a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">Mục 4</a>
-                                                        </li>
-                                                    </ul>
+                                                    <select
+                                                        class="w-100 text-left cursor-pointer form-select btn border-drop bg-lightt btn-dropdown btn-lightt dropdown-toggle d-flex align-items-center justify-content-between "
+                                                        aria-label="Default select example" name="time_ship">
+                                                        {{-- @php
+                                                print_r($sender);
+                                            @endphp --}} @foreach ($list_act as $v => $k)
+                                                            <option class="option" value="{{ $k }}" selected>
+                                                                {{ $k }}
+                                                            </option>
+                                                        @endforeach
+
+
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -693,12 +771,7 @@
                                         <label class="custom-control-label" for="customCheck13">Lưu thông tin đơn
                                             hàng</label>
                                     </div>
-                                    <style>
-                                        .fa-info-circle::before {
-                                            display: inline-block;
-                                            width: 12px !important;
-                                        }
-                                    </style>
+
                                     <div class="icon-save-info-order 1 cursor-pointer">
                                         <i _ngcontent-rkj-c14 aria-hidden="true"
                                             class="fa fa-info-circle pl-1 txt-gray w-12-icon"
@@ -713,6 +786,7 @@
                         </div>
                     </div>
                 </div>
+                {{-- <button type="submit" class="btn btn-primary">Tạo đơn</button> --}}
             </div>
         </form>
     </div>

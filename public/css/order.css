@@ -352,3 +352,13 @@ a:hover {
     font-size: 24px;
     color: #ee0033;
 }
+.cod-a,
+.note-exam {
+    color: #007ad9 !important;
+    font-size: 13px;
+    font-style: italic;
+}
+.fa-info-circle::before {
+    display: inline-block;
+    width: 12px !important;
+}

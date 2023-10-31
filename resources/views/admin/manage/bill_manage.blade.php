@@ -58,9 +58,12 @@
                                 <!-- </div> -->
                                 {{-- </div> --}}
                             </div>
-                            <div class="form-group col-2 px-0 pl-5">
-                                <div class="calendar">
-                                    <input type="date" />
+                            <div class="form-group col-2 px-0 pl-3">
+                                <div class="flatpickr" style=" position: relative;">
+                                    <input class="w-100 form-control bg-white " type="text"
+                                        style="padding: 7px 0px 7px 12%;" id="datePicker" data-input>
+                                    <i style="position: absolute; top: 50%; left: 11%; transform: translate(-100%, -50%);"
+                                        class="fa-solid fa-calendar-days"></i>
                                 </div>
                             </div>
 
@@ -135,10 +138,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <button class="btn btn-print mr-2"><img _ngcontent-cpo-c12="" width="15px"
-                                        height="15px" src="public/img/printer-p.svg" /><span _ngcontent-cpo-c12=""> In
+                                        height="15px" src="{{ asset('public/img/printer-p.svg') }}" /><span
+                                        _ngcontent-cpo-c12=""> In
                                         đơn</span></button>
                                 <button class="btn bg-i-excel btn-print mr-2"><img _ngcontent-cpo-c12="" width="15px"
-                                        height="15px" src="public/img/printer-p.svg" /><span _ngcontent-cpo-c12=""> Xuất
+                                        height="15px" src="{{ asset('public/img/printer-p.svg') }}" /><span
+                                        _ngcontent-cpo-c12=""> Xuất
                                         excel</span></button>
                                 <button class="btn bg-e-excel btn-print mr-2"><i _ngcontent-cpo-c12=""
                                         class="fa fa-upload mr-1"></i><span _ngcontent-cpo-c12=""> Nhập
@@ -149,30 +154,39 @@
 
                     <div class="card border-none border-red-bot border-radius-none">
                         <ul class="d-flex card-body">
+
                             <li
                                 class="text-center total-order bg-f8 w-238 pt-4 position-relative cursor-pointer active_order">
+                                {{-- <a style="color: inherit" --}}
+                                {{-- href="{{ request()->fullurlWithQuery(['status_order' => 'all']) }}"> --}}
                                 <div class="text-center mb-2">
                                     <span class="img-bill-manage"><img src="public/svg/total-order.svg"
                                             alt="" /></span>
                                     <strong class="ml-3">Tổng số đơn</strong>
                                 </div>
-                                <span class="">17 đơn</span>
+                                <span class="">{{ $orderCount }} đơn</span>
+                                {{-- </a> --}}
                             </li>
+                            {{-- <a style="color: inherit" --}}
+                            {{-- href="{{ request()->fullurlWithQuery(['status_order' => 'successful']) }}"> --}}
+
                             <li class="text-center total-order bg-f8 w-238 pt-4 position-relative cursor-pointer">
                                 <div class="text-center mb-2">
                                     <span class="img-bill-manage"><img style="color: red"
                                             src="public/svg/success-order.svg" alt="" /></span>
                                     <strong class="ml-3">Lấy thành công</strong>
                                 </div>
-                                <span class="">0 đơn</span>
+                                <span class="">{{ $count[2] }} đơn</span>
                             </li>
+                            {{-- </a> --}}
+
                             <li class="text-center total-order bg-f8 w-238 pt-4 position-relative cursor-pointer">
                                 <div class="text-center mb-2">
                                     <span class="img-bill-manage"><img style="color: red" src="public/svg/wait-order.svg"
                                             alt="" /></span>
                                     <strong class="ml-3">Chờ lấy</strong>
                                 </div>
-                                <span class="">0 đơn</span>
+                                <span class="">{{ $count[0] }} đơn</span>
                             </li>
                             <li class="text-center total-order bg-f8 w-238 pt-4 position-relative cursor-pointer">
                                 <div class="text-center mb-2">
@@ -180,7 +194,7 @@
                                             src="public/svg/cancel-order.svg" alt="" /></span>
                                     <strong class="ml-3">Hủy lấy</strong>
                                 </div>
-                                <span class="">17 đơn</span>
+                                <span class="">{{ $count[3] }} đơn</span>
                             </li>
                             <li class="text-center total-order bg-f8 w-238 pt-4 position-relative cursor-pointer">
                                 <div class="text-center mb-2">
@@ -203,54 +217,68 @@
                                 </div>
                                 <div class="main-cont-group-list">
                                     <div class="item-main-cont cursor-pointer w-100 position-relative">
-                                        <button class="btn-cus no-border w-150">
-                                            <i _ngcontent-nrn-c25="" class="ic-square mr-2"
-                                                style="background-color: rgb(238, 0, 51)"></i>
-                                            <span class="font-weight-bold">Tất cả <span
-                                                    class="text-danger">(17)</span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="main-cont-group-list">
-                                    <div class="item-main-cont cursor-pointer w-100 position-relative">
-                                        <button class="btn-cus no-border w-150">
-                                            <i _ngcontent-nrn-c25="" class="ic-square mr-2"
-                                                style="background-color: rgb(34, 124, 158)"></i>
-                                            <span class="font-weight-bold">Đã tiếp nhận <span
-                                                    class="text-danger">(17)</span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="main-cont-group-list">
-                                    <div class="item-main-cont cursor-pointer w-100 position-relative">
-                                        <button class="btn-cus no-border w-150">
-                                            <i _ngcontent-nrn-c25="" class="ic-square mr-2"
-                                                style="background-color: rgb(19, 178, 163)"></i>
-                                            <span class="font-weight-bold">Đang lấy hàng <span
-                                                    class="text-danger">(17)</span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="main-cont-group-list">
-                                    <div class="item-main-cont cursor-pointer w-100 position-relative">
-                                        <button class="btn-cus no-border w-150">
-                                            <i _ngcontent-nrn-c25="" class="ic-square mr-2"
-                                                style="background-color: rgb(75, 124, 125)"></i>
+                                        <a href="{{ request()->fullurlWithQuery(['status_order' => 'all']) }}">
+                                            <button class="btn-cus no-border w-150">
+                                                <i _ngcontent-nrn-c25="" class="ic-square mr-2"
+                                                    style="background-color: rgb(238, 0, 51)"></i>
+                                                <span class="font-weight-bold">Tất cả <span
+                                                        class="text-danger">({{ $orderCount }})</span></span>
+                                            </button>
+                                        </a>
 
-                                            <span class="font-weight-bold">Đã lấy hàng <span
-                                                    class="text-danger">(17)</span></span>
-                                        </button>
                                     </div>
                                 </div>
                                 <div class="main-cont-group-list">
                                     <div class="item-main-cont cursor-pointer w-100 position-relative">
-                                        <button class="btn-cus no-border w-150">
-                                            <i _ngcontent-nrn-c25="" class="ic-square mr-2"
-                                                style="background-color: rgb(75, 124, 125)"></i>
-                                            <span class="font-weight-bold">Đang vận chuyển <span
-                                                    class="text-danger">(17)</span></span>
-                                        </button>
+                                        <a href="{{ request()->fullurlWithQuery(['status_order' => 'processing']) }}">
+                                            <button class="btn-cus no-border w-150">
+                                                <i _ngcontent-nrn-c25="" class="ic-square mr-2"
+                                                    style="background-color: rgb(200, 177, 150)"></i>
+                                                <span class="font-weight-bold">Đang xử lý <span
+                                                        class="text-danger">({{ $count[0] }})</span></span>
+                                            </button>
+                                        </a>
+
                                     </div>
+                                </div>
+                                <div class="main-cont-group-list">
+                                    <a href="{{ request()->fullurlWithQuery(['status_order' => 'being_transported']) }}">
+                                        <div class="item-main-cont cursor-pointer w-100 position-relative">
+                                            <button class="btn-cus no-border w-150">
+                                                <i _ngcontent-nrn-c25="" class="ic-square mr-2"
+                                                    style="background-color: rgb(235, 150, 10);"></i>
+                                                <span class="font-weight-bold">Đang giao hàng <span
+                                                        class="text-danger">({{ $count[1] }})</span></span>
+                                            </button>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <div class="main-cont-group-list">
+                                    <a href="{{ request()->fullurlWithQuery(['status_order' => 'successful']) }}">
+                                        <div class="item-main-cont cursor-pointer w-100 position-relative">
+                                            <button class="btn-cus no-border w-150">
+                                                <i _ngcontent-nrn-c25="" class="ic-square mr-2"
+                                                    style="background-color: rgb(26, 140, 79)"></i>
+
+                                                <span class="font-weight-bold">Giao thành công <span
+                                                        class="text-danger">({{ $count[2] }})</span></span>
+                                            </button>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <div class="main-cont-group-list">
+                                    <a href="{{ request()->fullurlWithQuery(['status_order' => 'cancel']) }}">
+                                        <div class="item-main-cont cursor-pointer w-100 position-relative">
+                                            <button class="btn-cus no-border w-150">
+                                                <i _ngcontent-nrn-c25="" class="ic-square mr-2"
+                                                    style="background-color: rgb(227, 175, 133)"></i>
+                                                <span class="font-weight-bold">Shop hủy lấy <span
+                                                        class="text-danger">({{ $count[3] }})</span></span>
+                                            </button>
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="main-cont-group-list">
                                     <div class="item-main-cont cursor-pointer w-100 position-relative">
@@ -258,8 +286,8 @@
                                             <i _ngcontent-nrn-c25="" class="ic-square mr-2"
                                                 style="background-color: rgb(235, 150, 10)"></i>
 
-                                            <span class="font-weight-bold">Đang giao hàng <span
-                                                    class="text-danger">(17)</span></span>
+                                            <span class="font-weight-bold">Đang vận chuyển <span
+                                                    class="text-danger">()</span></span>
                                         </button>
                                     </div>
                                 </div>
@@ -269,7 +297,7 @@
                                             <i _ngcontent-nrn-c25="" class="ic-square mr-2"
                                                 style="background-color: rgb(165, 49, 62)"></i>
                                             <span class="font-weight-bold">Chờ phát lại <span
-                                                    class="text-danger">(17)</span></span>
+                                                    class="text-danger">()</span></span>
                                         </button>
                                     </div>
                                 </div>
@@ -279,7 +307,7 @@
                                             <i _ngcontent-nrn-c25="" class="ic-square mr-2"
                                                 style="background-color: rgb(165, 49, 62)"></i>
                                             <span class="font-weight-bold">Tất cả <span
-                                                    class="text-danger">(17)</span></span>
+                                                    class="text-danger">()</span></span>
                                         </button>
                                     </div>
                                 </div>
@@ -309,76 +337,106 @@
                                 </thead>
 
                                 <tbody role="rowgroup" class="table_tbody_order bbt-table-tbody">
+                                    @if ($bills->count() > 0)
+                                        @foreach ($bills as $item)
+                                            <tr role="row" class="bbt-table">
+                                                <td role="gridcell">
+                                                    <div
+                                                        class="checkbox-receiver pl-5 pb-3 d-flex align-items-center justify-content-between custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="customCheck_order" />
+                                                        <label class="custom-control-label"
+                                                            for="customCheck_order"></label>
+                                                    </div>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <label class="vtp-btn-other-tab" for=""><i
+                                                            _ngcontent-hqc-c12="" class="fa fa-bars"></i></label>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="bill-order-table">
+                                                        <span class="green-text-order"> {{ $item->code_order }} </span>
+                                                    </div>
+                                                    <a class="purple-text-order"
+                                                        href="{{ route('detail_order', $item->id) }}">Xem chi tiết</a>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div style="color: rgb(102, 102, 102) !important"
+                                                        class="code-order-table">
+                                                        {{ $item->code_order }} </div>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="sender-order font-weight-bold">{{ $item->receiver }}
+                                                    </div>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="receiver-order">
+                                                        <div class="name-receiver font-weight-bold">{{ $item->sender }}
+                                                        </div>
+                                                        <div class="phone-number-rece">{{ $item->phone_sender }}</div>
+                                                    </div>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="product-name-order font-weight-bold">
+                                                        {{ $item->product_name }}
+                                                    </div>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="status-order">
+                                                        @if ($item->status == 'Đang xử lý')
+                                                            <label _ngcontent-hqc-c12="" class="vtp-label-status"
+                                                                style="background-color: rgb(200, 177, 150)"> Đang xử lý
+                                                            </label>
+                                                        @elseif($item->status == 'Đang giao hàng')
+                                                            <label _ngcontent-hqc-c12="" class="vtp-label-status"
+                                                                style="background-color: rgb(235, 150, 10);"> Đang giao
+                                                                hàng
+                                                            </label>
+                                                        @elseif($item->status == 'Giao thành công')
+                                                            <label _ngcontent-hqc-c12="" class="vtp-label-status"
+                                                                style="background-color: rgb(26, 140, 79)"> Giao thành công
+                                                            </label>
+                                                        @else
+                                                            <label _ngcontent-hqc-c12="" class="vtp-label-status"
+                                                                style="background-color: rgb(227, 175, 133)"> Shop hủy lấy
+                                                            </label>
+                                                        @endif
 
-                                    @foreach ($bills as $item)
-                                        <tr role="row" class="bbt-table">
-                                            <td role="gridcell">
-                                                <div
-                                                    class="checkbox-receiver pl-5 pb-3 d-flex align-items-center justify-content-between custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="customCheck_order" />
-                                                    <label class="custom-control-label" for="customCheck_order"></label>
-                                                </div>
-                                            </td>
-                                            <td role="gridcell">
-                                                <label class="vtp-btn-other-tab" for=""><i _ngcontent-hqc-c12=""
-                                                        class="fa fa-bars"></i></label>
-                                            </td>
-                                            <td role="gridcell">
-                                                <div class="bill-order-table">
-                                                    <span class="green-text-order"> {{ $item->code_order }} </span>
-                                                </div>
-                                                <a class="purple-text-order"
-                                                    href="{{ route('detail_order', $item->order_id) }}">Xem chi tiết</a>
-                                            </td>
-                                            <td role="gridcell">
-                                                <div style="color: rgb(102, 102, 102) !important"
-                                                    class="code-order-table">
-                                                    230922-00002-00004</div>
-                                            </td>
-                                            <td role="gridcell">
-                                                <div class="sender-order font-weight-bold">{{ $item->receiver }} </div>
-                                            </td>
-                                            <td role="gridcell">
-                                                <div class="receiver-order">
-                                                    <div class="name-receiver font-weight-bold">{{ $item->sender }}</div>
-                                                    <div class="phone-number-rece">{{ $item->phone_sender }}</div>
-                                                </div>
-                                            </td>
-                                            <td role="gridcell">
-                                                <div class="product-name-order font-weight-bold">{{ $item->product_name }}
-                                                </div>
-                                            </td>
-                                            <td role="gridcell">
-                                                <div class="status-order">
-                                                    <label _ngcontent-hqc-c12="" class="vtp-label-status"
-                                                        style="background-color: rgb(227, 175, 133)"> Shop hủy lấy </label>
-                                                </div>
-                                            </td>
-                                            <td role="gridcell">
-                                                <div class="date-order">{{ $item->created_at }}</div>
-                                            </td>
-                                            <td role="gridcell">
-                                                <div class="cash-order green-text-order">0 ₫</div>
-                                            </td>
-                                            <td role="gridcell">
-                                                <div class="total-fare-order green-text-order">{{ $item->total_fee }}</div>
-                                            </td>
-                                            <td role="gridcell">
-                                                @if ($item->print == 'Đã in')
-                                                    <div class="print-status-order">
-                                                        <label style="background-color: #00cd90;"
-                                                            class="vtp-label-status">{{ $item->print }}</label>
                                                     </div>
-                                                @else
-                                                    <div class="print-status-order">
-                                                        <label style="background-color: rgb(250, 111, 111)"
-                                                            class="vtp-label-status">{{ $item->print }}</label>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="date-order">{{ $item->created_at }}</div>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="cash-order green-text-order">{{ $item->fee_ship }}đ</div>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="total-fare-order green-text-order">{{ $item->total_fee }}
+                                                        ₫
                                                     </div>
-                                                @endif
+                                                </td>
+                                                <td role="gridcell">
+                                                    @if ($item->print == 'Đã in')
+                                                        <div class="print-status-order">
+                                                            <label style="background-color: #00cd90;"
+                                                                class="vtp-label-status">{{ $item->print }}</label>
+                                                        </div>
+                                                    @else
+                                                        <div class="print-status-order">
+                                                            <label style="background-color: rgb(250, 111, 111)"
+                                                                class="vtp-label-status">{{ $item->print }}</label>
+                                                        </div>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="12" class="bg-white" style="text-align: center">
+                                                <p>Không tìm thấy đơn hàng nào !!! </p>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endif
 
                                 </tbody>
                             </table>

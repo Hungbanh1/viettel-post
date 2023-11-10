@@ -142,9 +142,7 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
-        'phone' => [
-            'regex' => 'Số điện thoại không hợp lệ.',
-        ],
+
     ],
 
     /*

@@ -40,6 +40,15 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'tbc' => [
+            'driver' => 'session',
+            'provider' => 'tbc',
+        ],
+        'bc' => [
+            'driver' => 'session',
+            'provider' => 'bc',
+        ],
+
 
         'api' => [
             'driver' => 'token',
@@ -71,10 +80,16 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'tbc' => [
+            'driver' => 'eloquent',
+            'model' => App\TBC::class,
+        ],
+        'bc' => [
+            'driver' => 'eloquent',
+            'model' => App\BC::class,
+        ],
+
+
     ],
 
     /*

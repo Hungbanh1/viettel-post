@@ -105,6 +105,19 @@ class AdminManageController extends Controller
 
         $sender->address = $request->input('address');
         $sender->final_address = $request->input('name') . ' - ' . $request->input('address');
-        echo $request->input('name') . ' - ' . $request->input('address');
+        $sender->save();
+        // echo $request->input('name') . ' - ' . $request->input('address');
+        return redirect('setting_sender');
+    }
+    function setting_sender()
+    {
+        $id = Auth::user()->id;
+        // echo "id là " . $id;
+        $sender = Sender::where("user_id", $id)->get();
+        // foreach ($sender as $item) {
+        //     echo $item->name;
+        // }
+        // print_r($sender);
+        return view('admin.user.setting_sender', compact('sender'));
     }
 }

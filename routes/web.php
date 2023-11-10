@@ -24,8 +24,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/tbc', "AdminTBCController@show")->name('tbc');
+Route::get('/bc', "AdminBCController@show");
 //dashboard
-Route::get('/dashboard', 'AdminDashBoardController@index');
+Route::get('/dashboard', 'AdminDashBoardController@index')->name('dashboard');
 Route::get('/test', 'AdminDashBoardController@test');
 //lookup
 Route::get('/lookup', 'AdminLookUpController@index')->name('lookup');
@@ -38,6 +40,7 @@ Route::get('/staticts_process', 'AdminManageController@staticts_process')->name(
 Route::get('/staticts_reve', 'AdminManageController@staticts_reve')->name('staticts_reve');
 Route::get('/manage_receiver', 'AdminManageController@manage_receiver')->name('manage_receiver');
 Route::post('/add_receiver', 'AdminManageController@add_receiver')->name('add_receiver');
+Route::get('/setting_sender', 'AdminManageController@setting_sender')->name('setting_sender');
 //order
 Route::get('/order_excel', 'AdminOrderController@order_excel')->name('order_excel');
 Route::get('/order', 'AdminOrderController@list')->name('order');

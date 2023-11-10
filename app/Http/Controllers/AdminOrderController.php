@@ -24,32 +24,45 @@ class AdminOrderController extends Controller
 
     function add(Request $request)
     {
-
-
+        // echo $request->input('fee_ship');
+        // $priceProduct = str_replace(',', '', $request->input('price_product'));
+        // $request->merge(['price_product' => $priceProduct]);
+        $messages = [
+            'name.regex' => 'Tên không hợp lệ.',
+            'phone.regex' => 'Số điện thoại không hợp lệ.',
+            'address.regex' => 'Địa chỉ không hợp lệ.',
+            'length.regex' => 'Chiều dài không hợp lệ.',
+            'width.regex' => 'Độ rộng không hợp lệ.',
+            'height.regex' => 'Chiều cao không hợp lệ.',
+            'product_name.regex' => 'Tên sản phẩm  không hợp lệ.',
+            'price_product.regex' => 'Giá không hợp lệ.',
+            'qty.regex' => 'Số lượng không hợp lệ.',
+            'kg.regex' => 'Khối lượng không hợp lệ.',
+            'fee_ship.regex' => 'Phí ship không hợp lệ.',
+            'code_order.regex' => 'Mã đơn không hợp lệ.',
+            'village.regex' => 'Tên đường không hợp lệ.',
+        ];
         $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'regex|string|max:255',
-            'address' => 'required|string',
-            'city' => 'required|string',
-            'ward' => 'required|string',
-            'district' => 'required|string',
-            'village' => 'required|string',
-            'special_features' => 'array',
-            'length' => 'required|numeric',
-            'width' => 'required|numeric',
-            'height' => 'required|numeric',
-            'shipmentType' => 'required|string',
-            'product_name' => 'required|string|max:255',
-            'price_product' => 'required|numeric',
-            'receiver' => 'required|string',
-            'qty' => 'required|numeric',
-            'kg' => 'required|numeric',
-            'fee_ship' => 'required|numeric',
-            'code_order' => 'required|string|unique:detail_orders,code_order', // Kiểm tra mã đơn hàng là duy nhất trong bảng detail_orders
-            'payer' => ['required', Rule::in(['sender', 'receiver'])], // Kiểm tra giá trị 'payer' chỉ có thể là 'sender' hoặc 'receiver'
-            'pick_request' => 'required|string',
-            'time_ship' => 'required|date',
-        ]);
+
+            'name' => ['regex:/[A-Za-z0-9]+[A-Za-z0-9\s\.,#-]*/', 'required', 'string'],
+
+            'phone' => ['regex:/^[0-9]+$/', 'required', 'min:11', 'numeric'],
+            'address' => ['regex:/[A-Za-z0-9]+[A-Za-z0-9\s\.,#-]*/', 'required', 'string'],
+            'length' => ['regex:/^[0-9]+$/', 'numeric'],
+            'width' => ['regex:/^[0-9]+$/', 'numeric', 'regex:/^[0-9]+$/'],
+            'height' => ['regex:/^[0-9]+$/', 'numeric', 'regex:/^[0-9]+$/'],
+            'product_name' => ['regex:/^[A-Za-z0-9\s\.,#-]+$/',  'string', 'max:255', 'regex:/^[A-Za-z0-9\s\.,#-]+$/'],
+            // 'price_product' => ['regex:/^(1|[\d,]+(\.\d{2})?)$/', 'numeric'],
+            'price_product' => ['regex:/^(?!0\d)[\d,]+(\.\d{2})?$/', 'string'],
+            'fee_ship' => ['regex:/^(?!0\d)[\d,]+(\.\d{2})?$/', 'string'],
+
+            'village' => ['regex:/[A-Za-z0-9]+[A-Za-z0-9\s\.,#-]*/', 'required', 'string'],
+
+            'qty' => ['regex:/^[0-9]+$/', 'required', 'numeric'],
+            'kg' => ['regex:/^[0-9]+(\.[0-9]{2})?$/', 'numeric'],
+            // 'fee_ship' => ['regex:/^[0-9]+(\.[0-9]{2})?$/', 'numeric'],
+            'code_order' => ['regex:/^[A-Za-z0-9\s\.,#-]+$/', 'string'],
+        ], $messages);
 
         $bills = Detail_order::all();
         $senderId = $request->input('select_sender');

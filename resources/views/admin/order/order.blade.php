@@ -165,6 +165,11 @@
                                         <input type="tel" class="form-control form-reci" name="address"
                                             id="address"
                                             placeholder="Nhập địa chỉ (số nhà/tên đường, phường/xã, quận/huyện, tỉnh/thành...)" />
+                                        @error('address')
+                                            <span style="display: block" class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -176,6 +181,11 @@
                                                 <select class="form-select form-control form-select-sm mb-3 city_text"
                                                     name='city' id="city" aria-label=".form-select-sm">
                                                     <option value="" selected>Chọn tỉnh thành</option>
+                                                    @error('city')
+                                                        <span style="display: block" class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </select>
                                             </div>
                                             <div class="col-6">
@@ -183,6 +193,11 @@
                                                 <select class="form-select form-control form-select-sm mb-3"
                                                     name="district" id="district" aria-label=".form-select-sm">
                                                     <option value="" selected>Huyện quận</option>
+                                                    @error('district')
+                                                        <span style="display: block" class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </select>
                                             </div>
                                             <div class="col-6">
@@ -190,12 +205,22 @@
                                                 <select class="form-select form-control form-select-sm mb-3"
                                                     name="ward" id="ward" aria-label=".form-select-sm">
                                                     <option value="" selected>Xã phường</option>
+                                                    @error('ward')
+                                                        <span style="display: block" class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </select>
                                             </div>
                                             <div class="col-6">
                                                 <!-- Khối 4 - Dưới phải -->
                                                 <input type="tel" class="form-control form-reci" id="village"
                                                     name="village" placeholder="Đường/Thôn/Xóm" />
+                                                @error('village')
+                                                    <span style="display: block" class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Tạo đơn</button>
@@ -335,8 +360,8 @@
                                     </div>
                                     <div class="input-group col-6">
                                         <div class="custom-check d-flex align-items-center">
-                                            <input class="mr-2" type="radio" id="customCheck111" name="shipmentType"
-                                                value="Bưu kiện" />
+                                            <input class="mr-2" type="radio" checked id="customCheck111"
+                                                name="shipmentType" value="Bưu kiện" />
                                             <label class="custom-check-label mb-0" for="customCheck111">Bưu kiện</label>
                                         </div>
                                     </div>
@@ -362,6 +387,11 @@
                                         <!-- <input class="form-control" type="tel"> -->
                                         <input type="tel" class="form-control form-reci" id="product_name"
                                             name="product_name" placeholder="Nhập tên hàng hóa" />
+                                        @error('product_name')
+                                            <span style="display: block" class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- // 3  -->
@@ -383,6 +413,11 @@
                                                 <input id="qty" name="qty" placeholder="1"
                                                     value="{{ old('qty') }}" type="text"
                                                     class="form-control form-reci pl-5" id="phone" placeholder="1" />
+                                                @error('qty')
+                                                    <span style="display: block" class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                             <div class="col-4 input-group">
                                                 <a data-c-tooltip="Trọng lượng" tooltip-position ="bottom"
@@ -398,6 +433,11 @@
                                                 <input type="text" class="form-control form-reci pl-25rem"
                                                     id="kg" name="kg" placeholder="Trọng lượng"
                                                     value="{{ old('kg') }}" placeholder="Trọng lượng" />
+                                                @error('kg')
+                                                    <span style="display: block" class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                                 <a href="" class="gram">g</a>
                                             </div>
                                             <div class="col-4 input-group">
@@ -411,9 +451,13 @@
                                                     <span class="text-danger">*</span>
                                                 </a>
                                                 <input type="text" class="form-control form-reci pl-25rem"
-                                                    id="price_product" name="price_product" oninput="formatNumber(this);"
-                                                    placeholder="Giá trị hàng"
-                                                    value="{{ old('price_product') ? number_format(old('price_product')) : '' }}" />
+                                                    id="price_product" name="price_product" step="0.01"
+                                                    oninput="formatNumber(this);" placeholder="Giá trị hàng" />
+                                                @error('price_product')
+                                                    <span style="display: block" class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
 
                                             </div>
                                         </div>
@@ -468,7 +512,7 @@
                                                     <div class="form-group mb-0" for="customCheck1">
                                                         <div
                                                             class="checkbox-receiver d-flex align-items-center justify-content-between custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
+                                                            <input checked type="checkbox" class="custom-control-input"
                                                                 id="customCheck11" name="special_features[]"
                                                                 value="Giá trị cao">
                                                             <label class="custom-control-label" for="customCheck11">Giá
@@ -573,14 +617,29 @@
                                                 <div class="col-4 pr-0">
                                                     <input type="tel" class="form-control form-reci" name="length"
                                                         id="length" placeholder="Dài(cm)" />
+                                                    @error('price_product')
+                                                        <span style="display: block" class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-4 pr-0">
                                                     <input type="tel" class="form-control form-reci" name="width"
                                                         id="width" placeholder="Rộng(cm)" />
+                                                    @error('width')
+                                                        <span style="display: block" class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-4 pr-0">
                                                     <input type="tel" class="form-control form-reci" name="height"
                                                         id="height" placeholder="Cao(cm)" />
+                                                    @error('height')
+                                                        <span style="display: block" class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="note-size-detail my-3 ml-3">
@@ -617,6 +676,12 @@
                                             <input type="tel" class="form-control form-reci"
                                                 id="code_order"name="code_order"
                                                 placeholder="Nhập mã đơn hàng tự tạo - VTP-123" />
+                                            @error('code_order')
+                                                <span style="display: block" class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
                                         </div>
                                     </div>
                                 </div>
@@ -642,10 +707,13 @@
                                             </div>
                                             <div
                                                 class="checkbox-receiver mb-2 d-flex align-items-center justify-content-between custom-control custom-checkbox">
-                                                <input type="checkbox" name="form_ship" value="Thu hộ bằng tiền hàng"
-                                                    class="custom-control-input" id="customCheck12" />
+                                                <input checked type="checkbox" name="form_ship"
+                                                    value="Thu hộ bằng tiền hàng" class="custom-control-input"
+                                                    id="customCheck12" />
+
                                                 <label class="custom-control-label" for="customCheck12">Thu hộ bằng tiền
                                                     hàng</label>
+
 
                                             </div>
                                             <script>
@@ -668,6 +736,12 @@
                                             <input type="tel" name="fee_ship" class="form-control form-reci"
                                                 id="fee_ship" value="0" oninput="formatNumber(this);"
                                                 placeholder="0 đ" />
+                                            @error('fee_ship')
+                                                <span style="display: block" class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
                                         </div>
                                     </div>
                                     <div class="col-6 form-group">
@@ -726,8 +800,8 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <div class="custom-check d-flex align-items-center">
-                                                        <input type="radio" id="pick_request_home" name="pick_request"
-                                                            value="Đến lấy hàng tại nhà" />
+                                                        <input checked type="radio" id="pick_request_home"
+                                                            name="pick_request" value="Đến lấy hàng tại nhà" />
                                                         <label class="custom-check-label ml-2 mb-0"
                                                             for="pick_request_home">Đến lấy hàng tại nhà</label>
                                                     </div>

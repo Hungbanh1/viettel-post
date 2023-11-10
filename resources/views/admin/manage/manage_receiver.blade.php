@@ -3,20 +3,14 @@
     <div class="container">
 
 
-        <!-- Nút để mở modal -->
-        {{-- <div class="form-group w-100">
 
-            <button type="button" class="btn btn-add w-25" data-toggle="modal" data-target="#myModal">
-                Mở Modal
-            </button>
-        </div> --}}
         <div class="form-group text-center w-100">
             <button class="btn btn-add w-10" data-toggle="modal" data-target="#myModal"></i><i _ngcontent-tiy-c19=""
                     class="fa fa-plus mr-2"></i>Thêm người gửi</button>
 
         </div>
 
-        <!-- Modal -->
+
         <div class="modal" id="myModal">
 
             <div class="modal-dialog modal-lg">

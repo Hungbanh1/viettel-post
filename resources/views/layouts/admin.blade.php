@@ -53,9 +53,14 @@
             <div class="col-md-2 px-0">
                 <div class="sidebar">
                     <!-- <h1>Sidebar</h1> -->
-                    <div class="logo-viet bg-white">
+                    {{-- <div class="logo-viet bg-white">
                         <a href>
-                            <img src="{{ asset('public/img/vietpost.png') }}" width="200px" height="108px" alt />
+                            <img src="{{ asset('public/img/uts.jpg') }}" width="200px" height="108px" alt />
+                        </a>
+                    </div> --}}
+                    <div class="logo-viet bg-white">
+                        <a href="">
+                            <img src="{{ asset('public/img/uts.jpg') }}" width="180px" alt="">
                         </a>
                     </div>
                     <script></script>

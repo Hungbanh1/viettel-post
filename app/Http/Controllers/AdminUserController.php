@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminUserController extends Controller
 {
@@ -29,6 +30,12 @@ class AdminUserController extends Controller
     }
     function setting()
     {
+        // $name = Auth::user()->name;
+        // echo $name;
+        // $id = Auth::user()->id;
+        // echo $id;
+        // $users = User::find('id', $id);
+
         return view("admin.user.setting_acc");
     }
     function change_password()

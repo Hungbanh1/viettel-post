@@ -33,7 +33,7 @@
                                                     <!-- <div class="input-group col-6 px-0 w-test"> -->
                                                     <!-- <input type="tel" class="form-control form-reci" id="phone" placeholder="Dài(cm)" /> -->
                                                     <input type="tel" class="form-reci form-control w-89" disabled
-                                                        id="phone" placeholder="truongvanquynh1992@gmail.com" />
+                                                        id="phone" value="{{ Auth::user()->email }}" />
                                                     <div class="input-group-append">
                                                         <button class="btn btn-primary ft-14">Thay đổi</button>
                                                     </div>
@@ -48,7 +48,8 @@
                                                     <!-- <div class="input-group col-6 px-0 w-test"> -->
                                                     <!-- <input type="tel" class="form-control form-reci" id="phone" placeholder="Dài(cm)" /> -->
                                                     <input type="tel" class="form-reci form-control w-89" disabled
-                                                        id="phone" placeholder="09794843242" />
+                                                        id="phone" value="{{ Auth::user()->phone }}"
+                                                        placeholder="09794843242" />
                                                     <div class="input-group-append">
                                                         <button class="btn btn-primary ft-14">Thay đổi</button>
                                                     </div>

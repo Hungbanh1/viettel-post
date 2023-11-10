@@ -101,11 +101,14 @@ label {
 }
 
 .logo-viet {
+    /* display: flex;
+    align-items: center;
+    height: 64px;
+    padding-left: 9px; */
     display: flex;
-    /* Can giữa theo chiều ngang */
-    align-items: center; /* Can giữa theo chiều dọc */
-    height: 64px; /* Đặt chiều cao của khung chứa hình ảnh */
-    padding-left: 9px;
+    align-items: center;
+    height: 65px;
+    padding-left: 32px;
 }
 .red-image {
     filter: hue-rotate(0deg); /* Màu đỏ */
